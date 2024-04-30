@@ -25,9 +25,17 @@ const SandwichShow = (props) => {
     getSandwich()
   }, [])
 
+  let showDescription = null
+  if (sandwich.description) {
+    showDescription = <p>Description: {sandwich.description}</p>
+  }
 
   return (
-    <h2>{sandwich.name}</h2>
+    <>
+      <h2>{sandwich.name}</h2>
+      <h3>Restaurant: {sandwich.restaurant}</h3>
+      {showDescription}
+    </>
   )
 }
 
