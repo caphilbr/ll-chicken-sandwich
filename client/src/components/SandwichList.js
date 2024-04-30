@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import SandwichTile from "./SandwichTile"
 
 const SandwichList = (props) => {
   const [sandwiches, setSandwiches] = useState([])
@@ -19,18 +20,12 @@ const SandwichList = (props) => {
   }, [])
 
   const sandwichList = sandwiches.map(sandwich => {
-    return (
-      <li key={sandwich.id}>
-        {sandwich.name} from {sandwich.restaurant}
-      </li>
-    )
+    return <SandwichTile key={sandwich.id} sandwich={sandwich} />
   })
 
   return (
     <>
-      <ul>
-        {sandwichList}
-      </ul>
+      {sandwichList}
     </>
   )
 }
