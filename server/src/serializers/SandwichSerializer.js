@@ -1,3 +1,5 @@
+import ReviewSerializer from "./ReviewSerializer.js"
+
 class SandwichSerializer {
   static summaryForIndex = (sandwiches) => {
     const allowedFields = ["id", "name", "restaurant"]
@@ -11,12 +13,20 @@ class SandwichSerializer {
     return serializedSandwiches 
   }
   
-  static summaryForShow = (sandwich) => {
-    const allowedFields = ["id", "name", "description", "imgUrl", "restaurant"]
+  static summaryForShow = async (sandwich) => {
+    const allowedSandwichFields = [
+      "id",
+      "name",
+      "description",
+      "imgUrl",
+      "restaurant"
+    ]
     const serializedSandwich = {}
-    allowedFields.forEach(field => {
+    allowedSandwichFields.forEach(field => {
       serializedSandwich[field] = sandwich[field]
     })
+    const relatedReviews = await sandwich.$relatedQuery("reviews")
+    serializedSandwich.reviews = ReviewSerializer.summaryForShow(relatedReviews)
     return serializedSandwich
   }
 }

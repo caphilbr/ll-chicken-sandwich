@@ -17,7 +17,7 @@ sandwichesRouter.get("/", async (req, res) => {
 sandwichesRouter.get("/:id", async (req, res) => {
   try {
     const sandwich = await Sandwich.query().findById(req.params.id)
-    const serializedSandwich = SandwichSerializer.summaryForShow(sandwich)
+    const serializedSandwich = await SandwichSerializer.summaryForShow(sandwich)
     res.status(200).json({ sandwich: serializedSandwich })
   } catch(error) {
     res.status(500).json({ errors: error })
