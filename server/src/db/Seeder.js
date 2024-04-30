@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { connection } from "../boot.js";
-import { Sandwich, Review } from "../models/index.js"
+import { Sandwich, Review, User } from "../models/index.js"
 
 class Seeder {
   static async seed() {
@@ -25,6 +25,11 @@ class Seeder {
       description: "To die for."
     });
 
+    await User.query().insert({
+      email: "testUser@email.com",
+      cryptedPassword: "password"
+    })
+    
     await Review.query().insert({
       title: "da bomb",
       body: "went down OK",
