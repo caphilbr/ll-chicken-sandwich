@@ -19,7 +19,8 @@ class SandwichSerializer {
       "name",
       "description",
       "imgUrl",
-      "restaurant"]
+      "restaurant"
+    ]
     const serializedSandwich = {}
     allowedSandwichFields.forEach(field => {
       serializedSandwich[field] = sandwich[field]

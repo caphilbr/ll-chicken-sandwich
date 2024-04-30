@@ -6,7 +6,8 @@ class ReviewSerializer {
       "body",
       "starRating",
       "title",
-      "userId"]
+      "userId"
+    ]
     const serializedReviews = reviews.map(review => {
       const serializedReview = {}
       allowedReviewFields.forEach(field => {
