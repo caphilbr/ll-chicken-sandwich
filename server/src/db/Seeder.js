@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { connection } from "../boot.js";
-import { Sandwich } from "../models/index.js"
+import { Sandwich, Review } from "../models/index.js"
 
 class Seeder {
   static async seed() {
@@ -24,6 +24,28 @@ class Seeder {
       restaurant: "Mochiko Hawaiian",
       description: "To die for."
     });
+
+    await Review.query().insert({
+      title: "da bomb",
+      body: "went down OK",
+      starRating: 4,
+      userId: 1,
+      sandwichId: 2
+    })
+    await Review.query().insert({
+      title: "meh",
+      body: "is a'right",
+      starRating: 2,
+      userId: 1,
+      sandwichId: 2
+    })
+    await Review.query().insert({
+      title: "spicy",
+      body: "don't order the spiciest blend",
+      starRating: 3,
+      userId: 1,
+      sandwichId: 1
+    })
     
     console.log("Done!");
     await connection.destroy();

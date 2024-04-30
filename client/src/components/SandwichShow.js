@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import ReviewTile from './ReviewTile'
 
 const SandwichShow = (props) => {
-  const [sandwich, setSandwich] = useState({})
+  const [sandwich, setSandwich] = useState({
+    id: "",
+    name: "",
+    restaurant: "",
+    imgUrl: "",
+    description: "",
+    reviews: []
+  })
 
   const getSandwich = async () => {
     try {
@@ -30,11 +38,17 @@ const SandwichShow = (props) => {
     showDescription = <p>Description: {sandwich.description}</p>
   }
 
+  const reviewList = sandwich.reviews.map(review => {
+    return <ReviewTile key={review.id} review={review} />
+  })
+
   return (
     <>
       <h2>{sandwich.name}</h2>
       <h3>Restaurant: {sandwich.restaurant}</h3>
       {showDescription}
+      <h4>Reviews:</h4>
+      {reviewList}
     </>
   )
 }

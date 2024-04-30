@@ -23,6 +23,20 @@ class Sandwich extends unique(Model) {
       }
     }
   }
+
+  static get relationMappings() {
+    const { Review } = require("./index.js")
+    return {
+      reviews: {
+        relation: Model.HasManyRelation,
+        modelClass: Review,
+        join: {
+          from: "sandwiches.id",
+          to: "reviews.sandwichId"
+        }
+      }
+    }
+  }
 }
 
 module.exports = Sandwich
