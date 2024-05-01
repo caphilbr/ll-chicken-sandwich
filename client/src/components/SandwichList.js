@@ -66,11 +66,6 @@ const SandwichList = (props) => {
           <SandwichForm addSandwich={addSandwich} setErrors={setErrors}/>
         </>
     )
-  
-  let formElement  
-  if (showForm) {
-    formElement = formQuestion
-  }
 
   const sandwichList = sandwiches.map(sandwich => {
     return <SandwichTile key={sandwich.id} sandwich={sandwich}/>
@@ -81,7 +76,7 @@ const SandwichList = (props) => {
       {sandwichList}
       <div>
         <p onClick={toggleFormOnClick}>Add Sandwich?</p>
-        {formElement}
+        {showForm ? formQuestion : null}
       </div>
     </>
   )
