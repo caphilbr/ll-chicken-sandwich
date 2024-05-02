@@ -41,7 +41,9 @@ const SandwichShow = (props) => {
     if(props.user){
       if (showReviewForm) {
         setShowReviewForm(false)
-      } else setShowReviewForm(true)
+      } else {
+        setShowReviewForm(true)
+      }
     } else {
       setShowReviewForm(false)
       setShowLogInMessage(true)

@@ -58,7 +58,9 @@ const SandwichList = (props) => {
   const toggleFormOnClick = event => {
     if (showForm) {
       setShowForm(false)
-    } else setShowForm(true)
+    } else {
+      setShowForm(true)
+    }
   }
 
   const formQuestion = 

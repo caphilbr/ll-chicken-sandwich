@@ -73,7 +73,7 @@ const SandwichForm = (props) => {
       </label>
       <div>
         <input className="button" type="submit" value="Create Sandwich"/>
-        <p className="button clear-button" onClick={clearForm} type="button">
+        <p className="button clear-button" onClick={clearForm}>
           Clear
         </p>
       </div>
