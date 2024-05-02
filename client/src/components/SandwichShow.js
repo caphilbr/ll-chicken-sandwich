@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import ReviewTile from './ReviewTile'
+import NewReviewForm from './NewReviewForm'
 
 const SandwichShow = (props) => {
   const [sandwich, setSandwich] = useState({
@@ -10,10 +12,11 @@ const SandwichShow = (props) => {
     description: "",
     reviews: []
   })
+  const { id } = useParams()
+  const [showReviewForm, setShowReviewForm] =  useState(false)
 
   const getSandwich = async () => {
     try {
-      const id = props.match.params.id
       const response = await fetch(`/api/v1/sandwiches/${id}`)
       if(!response.ok) {
         const errorMessage =
@@ -33,6 +36,50 @@ const SandwichShow = (props) => {
     getSandwich()
   }, [])
 
+  const newReview = () => {
+    if(!props.user){
+      alert("You must be logged in to make a review!")
+    } else if (!showReviewForm){
+        setShowReviewForm(true)
+    }
+  }   
+
+  const addReview = async (newReview) => {
+    try {
+      const response = await fetch(`/api/v1/sandwiches/${id}/reviews`, {
+        method: "POST",
+        headers: new Headers ({
+          "Content-Type": "application/json"
+        }),
+        body: JSON.stringify(newReview)
+      })
+      if (!response.ok) {
+        if (response.status === 422) {
+          const errorBody = await response.json()
+          const newErrors = translateServerErrors(errorBody.errors)
+          return setErrors(newErrors)
+        } else {
+          const errorMessage = `${response.status} (${response.statusText})`
+          const error = new Error(errorMessage)
+          throw error
+        }
+      } else {
+        const responseBody = await response.json()
+        const newReview = responseBody.review
+        setSandwich({
+          ...sandwich,
+          reviews: [
+            ...sandwich.reviews,
+            newReview
+          ]
+        })
+      }
+    } catch (error) {
+      console.log(error)
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
+
   let showDescription = null
   if (sandwich.description) {
     showDescription = <p>Description: {sandwich.description}</p>
@@ -47,8 +94,10 @@ const SandwichShow = (props) => {
       <h2>{sandwich.name}</h2>
       <h3>Restaurant: {sandwich.restaurant}</h3>
       {showDescription}
-      <h4>Reviews:</h4>
+      <h4>Reviews</h4>
       {reviewList}
+      <p onClick={newReview}>Add Review?</p>
+      { showReviewForm ? <NewReviewForm addReview={addReview}/> : null}
     </>
   )
 }
