@@ -1,4 +1,5 @@
 import React from 'react'
+import ReviewVotes from './ReviewVotes'
 
 const ReviewTile = (props) => {
 
@@ -8,6 +9,7 @@ const ReviewTile = (props) => {
       <p>{props.review.title}</p>
       <p>{props.review.body}</p>
       <p>{props.review.starRating}</p>
+      <ReviewVotes review={props.review} />
     </div>
   )
 }

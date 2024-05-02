@@ -13,7 +13,7 @@ class SandwichSerializer {
     return serializedSandwiches 
   }
   
-  static summaryForShow = async (sandwich) => {
+  static summaryForShow = async (sandwich, userId) => {
     const allowedSandwichFields = [
       "id",
       "name",
@@ -26,7 +26,7 @@ class SandwichSerializer {
       serializedSandwich[field] = sandwich[field]
     })
     const relatedReviews = await sandwich.$relatedQuery("reviews")
-    serializedSandwich.reviews = ReviewSerializer.summaryForShow(relatedReviews)
+    serializedSandwich.reviews = await ReviewSerializer.summaryForShow(relatedReviews, userId)
     return serializedSandwich
   }
 }

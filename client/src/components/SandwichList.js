@@ -10,8 +10,8 @@ const SandwichList = (props) => {
       const parsedData = await response.json()
       setSandwiches(parsedData.sandwiches)
     } catch(error) {
-      console.log("Error in the fetch request")
       console.log(error)
+      res.status(500).json({ error })
     }
   }
   

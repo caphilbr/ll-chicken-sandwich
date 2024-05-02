@@ -12,3 +12,20 @@
   -moz-tab-size: 4;
   tab-size: 4;
 }
+
+.greyVote {
+  color: gray;
+  cursor: pointer;
+}
+
+.greenVote {
+  color: green;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.redVote {
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}

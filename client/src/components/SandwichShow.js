@@ -11,9 +11,9 @@ const SandwichShow = (props) => {
     reviews: []
   })
 
+  const id = props.match.params.id
   const getSandwich = async () => {
     try {
-      const id = props.match.params.id
       const response = await fetch(`/api/v1/sandwiches/${id}`)
       if(!response.ok) {
         const errorMessage =
@@ -26,6 +26,7 @@ const SandwichShow = (props) => {
       }
     } catch (error) {
       console.log(error.message)
+      res.status(500).json({ error })
     }
   }
 
