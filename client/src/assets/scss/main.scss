@@ -12,3 +12,50 @@
   -moz-tab-size: 4;
   tab-size: 4;
 }
+
+.bold {
+  font-weight: bold;
+}
+
+.review-body {
+  text-indent: 2rem;
+  font-size: smaller;
+}
+
+.review-tile {
+  border: 1px solid black;
+  margin: 1rem;
+  padding: 0.5rem;
+  font-size: larger;
+}
+
+.border-right {
+  border-right: 2px solid black;
+
+}
+
+.clear-button {
+  margin-left: 1rem;
+}
+
+.show {
+  border: 1px black solid;
+  margin: 0.5rem;
+  background-color: lightblue;
+}
+.review-tile p {
+  margin: 0;
+}
+
+.form-container {
+  margin: 0.5rem;
+}
+
+.sandwich-tile {
+  border-radius: 2.5rem;
+  height: max(8rem, auto);
+  text-align: center;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+}

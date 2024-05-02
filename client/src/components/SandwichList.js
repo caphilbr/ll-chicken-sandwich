@@ -56,7 +56,9 @@ const SandwichList = (props) => {
   }, [])
 
   const toggleFormOnClick = event => {
-    setShowForm(true)
+    if (showForm) {
+      setShowForm(false)
+    } else setShowForm(true)
   }
 
   const formQuestion = 
@@ -72,13 +74,15 @@ const SandwichList = (props) => {
   })
 
   return (
-    <>
-      {sandwichList}
-      <div>
-        <p onClick={toggleFormOnClick}>Add Sandwich?</p>
+    <div className="grid-x grid-padding-x grid-padding-y">
+      <div className="cell small-12">
+        <p className="button" onClick={toggleFormOnClick}>Add Sandwich</p>
         {showForm ? formQuestion : null}
       </div>
-    </>
+      <div className="cell small-12 grid-x grid-margin-x">
+        {sandwichList}
+      </div>
+    </div>
   )
 }
 

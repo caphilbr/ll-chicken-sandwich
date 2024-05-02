@@ -37,7 +37,7 @@ const SandwichForm = (props) => {
   }
 
   return (
-    <form className="callout" onSubmit={onSubmitHandler}>
+    <form className="form-container" onSubmit={onSubmitHandler}>
       <label htmlFor="name">Sandwich Name:
         <input 
           type="text" 
@@ -71,11 +71,11 @@ const SandwichForm = (props) => {
           value={sandwich.imageURL}
         />
       </label>
-      <div className="button-group">
-        <input type="submit" value="Create Sandwich"/>
-        <button onClick={clearForm} type="button">
+      <div>
+        <input className="button" type="submit" value="Create Sandwich"/>
+        <p className="button clear-button" onClick={clearForm} type="button">
           Clear
-        </button>
+        </p>
       </div>
     </form>
   )

@@ -39,7 +39,9 @@ const SandwichShow = (props) => {
 
   const newReview = () => {
     if(props.user){
-      setShowReviewForm(true)
+      if (showReviewForm) {
+        setShowReviewForm(false)
+      } else setShowReviewForm(true)
     } else {
       setShowReviewForm(false)
       setShowLogInMessage(true)
@@ -83,7 +85,7 @@ const SandwichShow = (props) => {
 
   let showDescription = null
   if (sandwich.description) {
-    showDescription = <p>Description: {sandwich.description}</p>
+    showDescription = <h4 className="cell small-6">Description: {sandwich.description}</h4>
   }
 
   const reviewList = sandwich.reviews.map(review => {
@@ -92,14 +94,18 @@ const SandwichShow = (props) => {
 
   return (
     <>
-      <h2>{sandwich.name}</h2>
-      <h3>Restaurant: {sandwich.restaurant}</h3>
-      {showDescription}
+      <div className="grid-x grid-margin-x show">
+        <h2 className="cell small-12">{sandwich.name}</h2>
+        <h4 className="cell small-6 border-right">Restaurant: {sandwich.restaurant}</h4>
+        {showDescription}
+      </div>
+      <div className="form-container">
+        <p className="button" onClick={newReview}>Add Review</p>
+        { showLogInMessage ? <p>You need to be logged in to leave a review</p> : null}
+        { showReviewForm ? <NewReviewForm addReview={addReview}/> : null}
+      </div>
       <h4>Reviews</h4>
       {reviewList}
-      <p onClick={newReview}>Add Review</p>
-      { showLogInMessage ? <p>You need to be logged in to leave a review</p> : null}
-      { showReviewForm ? <NewReviewForm addReview={addReview}/> : null}
     </>
   )
 }
