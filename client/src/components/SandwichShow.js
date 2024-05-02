@@ -14,6 +14,7 @@ const SandwichShow = (props) => {
   })
   const { id } = useParams()
   const [showReviewForm, setShowReviewForm] =  useState(false)
+  const [showLogInMessage, setShowLogInMessage] = useState(false)
 
   const getSandwich = async () => {
     try {
@@ -37,12 +38,13 @@ const SandwichShow = (props) => {
   }, [])
 
   const newReview = () => {
-    if(!props.user){
-      alert("You must be logged in to make a review!")
-    } else if (!showReviewForm){
-        setShowReviewForm(true)
+    if(props.user){
+      setShowReviewForm(true)
+    } else {
+      setShowReviewForm(false)
+      setShowLogInMessage(true)
     }
-  }   
+  }
 
   const addReview = async (newReview) => {
     try {
@@ -75,7 +77,6 @@ const SandwichShow = (props) => {
         })
       }
     } catch (error) {
-      console.log(error)
       console.error(`Error in fetch: ${error.message}`)
     }
   }
@@ -96,7 +97,8 @@ const SandwichShow = (props) => {
       {showDescription}
       <h4>Reviews</h4>
       {reviewList}
-      <p onClick={newReview}>Add Review?</p>
+      <p onClick={newReview}>Add Review</p>
+      { showLogInMessage ? <p>You need to be logged in to leave a review</p> : null}
       { showReviewForm ? <NewReviewForm addReview={addReview}/> : null}
     </>
   )
