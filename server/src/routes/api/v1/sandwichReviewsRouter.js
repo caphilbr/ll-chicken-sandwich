@@ -14,8 +14,7 @@ sandwichReviewsRouter.post("/", async (req, res) => {
 
   try {
     const newReview = await Review.query().insertAndFetch(formInput)
-    const user = await User.query().findById(formInput.userId)
-    newReview.username = user.username
+    newReview.username = req.user.username
     return res.status(201).json({ review: newReview })
   } catch(error) {
     res.status(500).json({ error:error })

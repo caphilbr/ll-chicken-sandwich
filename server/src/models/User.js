@@ -36,12 +36,12 @@ class User extends uniqueFunc(Model) {
     };
   }
 
-  $beforeInsert = () => {
-    return this.$checkUniqueness("email")
+  $beforeInsert() {
+    return this.$checkUniqueness("email");
   }
 
-  $beforeUpdate = () => {
-    return this.$checkUniqueness("email")
+  $beforeUpdate() {
+    return this.$checkUniqueness("email");
   }
 
   $formatJson(json) {
