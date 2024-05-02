@@ -38,7 +38,7 @@ const NewReviewForm = (props) => {
         <label> Star Rating:
           <input type='text' name='starRating' onChange={handleInputChange} value={reviewFormFields.starRating} />
         </label>
-        <input type='submit' value='Submit' />
+        <input className="button" type='submit' value='Submit' />
       </form>
     </>
   )

@@ -1,5 +1,5 @@
 class ReviewSerializer {
-  static summaryForShow = (reviews) => {
+  static summaryForShow = async reviews => {
     const allowedReviewFields = [
       "id",
       "createdAt",
@@ -8,13 +8,15 @@ class ReviewSerializer {
       "title",
       "userId"
     ]
-    const serializedReviews = reviews.map(review => {
+    const serializedReviews = Promise.all(reviews.map(async review => {
       const serializedReview = {}
       allowedReviewFields.forEach(field => {
         serializedReview[field] = review[field]
       })
+      const reviewUser = await review.$relatedQuery("user")
+      serializedReview.username = reviewUser.username
       return serializedReview
-    })
+    }))
     return serializedReviews
   }
 }
