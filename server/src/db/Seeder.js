@@ -31,6 +31,7 @@ class Seeder {
 
     await User.query().insert({
       email: "testUser@email.com",
+      username: "testUser",
       cryptedPassword: "password"
     })
     
