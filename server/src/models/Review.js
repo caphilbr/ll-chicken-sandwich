@@ -18,6 +18,26 @@ class Review extends Model {
       }
     }
   }
+  
+  async voteCount (reviewId) {
+    let upVotes = 0
+    let downVotes = 0
+    const thisReview = await Review.query().findById(reviewId)
+    const reviewVotes = await thisReview.$relatedQuery("votes")
+    reviewVotes.forEach((vote) => {
+      if(vote.voteStatus == 1) {
+        upVotes++
+      }
+      if (vote.voteStatus == -1) {
+        downVotes++
+      }
+    })
+
+    return {
+      upVotes: upVotes,
+      downVotes: downVotes
+    }
+  }
 
   static get relationMappings() {
     const { User, Sandwich, Vote } = require("./index.js")

@@ -1,3 +1,5 @@
+import Review from "../models/Review.js"
+
 class ReviewSerializer {
   static summaryForShow = async (reviews, userId) => {
     const allowedReviewFields = [
@@ -15,7 +17,6 @@ class ReviewSerializer {
       })
 
       const relatedVotes = await review.$relatedQuery("votes")
-      
       if (!relatedVotes) {
         serializedReview.voteStatus = 0
       } else {
@@ -26,8 +27,10 @@ class ReviewSerializer {
         serializedReview.voteStatus = relatedVotesByUser[0].voteStatus
         }
       }
+      serializedReview.votes = await review.voteCount(review.id)
       return serializedReview
     }))
+
     return serializedReviews
   }
 }

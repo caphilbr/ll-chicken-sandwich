@@ -3,6 +3,7 @@ import React, { useState } from "react"
 const ReviewVotes = props => {
 
   const [voteStatus, setVoteStatus] = useState(props.review.voteStatus)
+  const [voteCount, setVoteCount] = useState(props.review.votes)
 
   const postVote = async (newStatus) => {
     try {
@@ -15,9 +16,11 @@ const ReviewVotes = props => {
         })
       })
       const responseBody = await response.json()
-      setVoteStatus(responseBody.voteStatus)
       if (responseBody.notAuthorized) {
         alert("Must be logged in to vote on reviews")
+      } else {
+        setVoteStatus(responseBody.voteStatus)
+        setVoteCount(responseBody.voteCount)
       }
     } catch (error) {
       res.status(500).json({ error })
@@ -49,8 +52,8 @@ const ReviewVotes = props => {
 
   return (
     <div className="like-statuses">
-      <p onClick={onUpVote} className={upVoteClass}>Up</p>
-      <p onClick={onDownVote} className={downVoteClass}>down</p>
+      <p onClick={onUpVote} className={upVoteClass}>Up</p>{voteCount.upVotes}
+      <p onClick={onDownVote} className={downVoteClass}>down</p>{voteCount.downVotes}
     </div>
   )
 }
