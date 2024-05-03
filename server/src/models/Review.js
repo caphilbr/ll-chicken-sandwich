@@ -19,11 +19,10 @@ class Review extends Model {
     }
   }
   
-  async voteCount (reviewId) {
+  async voteCount () {
     let upVotes = 0
     let downVotes = 0
-    const thisReview = await Review.query().findById(reviewId)
-    const reviewVotes = await thisReview.$relatedQuery("votes")
+    const reviewVotes = await this.$relatedQuery("votes")
     reviewVotes.forEach((vote) => {
       if(vote.voteStatus == 1) {
         upVotes++

@@ -69,18 +69,6 @@ class Seeder {
       reviewId: 2,
       voteStatus: -1
     })
-
-    await Vote.query().insert({
-      userId: 2,
-      reviewId: 1,
-      voteStatus: 1
-    })
-
-    await Vote.query().insert({
-      userId: 2,
-      reviewId: 2,
-      voteStatus: -1
-    })
     
     console.log("Done!");
     await connection.destroy();

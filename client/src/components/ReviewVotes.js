@@ -4,6 +4,7 @@ const ReviewVotes = props => {
 
   const [voteStatus, setVoteStatus] = useState(props.review.voteStatus)
   const [voteCount, setVoteCount] = useState(props.review.votes)
+  const [showSignInMessage, setShowSignInMessage] = useState(false)
 
   const postVote = async (newStatus) => {
     try {
@@ -16,8 +17,8 @@ const ReviewVotes = props => {
         })
       })
       const responseBody = await response.json()
-      if (responseBody.notAuthorized) {
-        alert("Must be logged in to vote on reviews")
+      if (response.status === 401) {
+        setShowSignInMessage(true)
       } else {
         setVoteStatus(responseBody.voteStatus)
         setVoteCount(responseBody.voteCount)
@@ -50,10 +51,16 @@ const ReviewVotes = props => {
     downVoteClass = "redVote"
   }
 
+  let signinMessage
+  if (showSignInMessage) {
+    signinMessage = "You must be signed in to vote"
+  }
+
   return (
     <div className="like-statuses">
-      <p onClick={onUpVote} className={upVoteClass}>Up</p>{voteCount.upVotes}
-      <p onClick={onDownVote} className={downVoteClass}>down</p>{voteCount.downVotes}
+      <p>{signinMessage}</p>
+      <p onClick={onUpVote} className={upVoteClass}>Up : {voteCount.upVotes}</p>
+      <p onClick={onDownVote} className={downVoteClass}>Down : {voteCount.downVotes}</p>
     </div>
   )
 }

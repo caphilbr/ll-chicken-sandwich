@@ -26,7 +26,10 @@ class SandwichSerializer {
       serializedSandwich[field] = sandwich[field]
     })
     const relatedReviews = await sandwich.$relatedQuery("reviews")
-    serializedSandwich.reviews = await ReviewSerializer.summaryForShow(relatedReviews, userId)
+    serializedSandwich.reviews = await ReviewSerializer.summaryForShow(
+      relatedReviews,
+      userId
+    )
     return serializedSandwich
   }
 }
