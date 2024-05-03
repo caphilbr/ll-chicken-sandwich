@@ -8,7 +8,8 @@ class ReviewSerializer {
       "body",
       "starRating",
       "title",
-      "userId"
+      "userId",
+      "sandwichId"
     ]
     const serializedReviews = Promise.all(reviews.map(async review => {
       const serializedReview = {}
@@ -19,11 +20,11 @@ class ReviewSerializer {
       if (!relatedVotes) {
         serializedReview.voteStatus = 0
       } else {
-        const relatedVotesByUser = relatedVotes.filter(vote => vote.userId == userId)
-        if (relatedVotesByUser.length === 0) {
+        const relatedVotesByUser = relatedVotes.find(vote => vote.userId == userId)
+        if (!relatedVotesByUser) {
           serializedReview.voteStatus = 0
         } else {
-        serializedReview.voteStatus = relatedVotesByUser[0].voteStatus
+        serializedReview.voteStatus = relatedVotesByUser.voteStatus
         }
       }
       serializedReview.votes = await review.voteCount()

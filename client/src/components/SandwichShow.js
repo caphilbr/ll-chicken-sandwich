@@ -30,7 +30,6 @@ const SandwichShow = (props) => {
       }
     } catch (error) {
       console.log(error)
-      res.status(500).json({ error })
     }
   }
 
@@ -92,7 +91,15 @@ const SandwichShow = (props) => {
   }
 
   const reviewList = sandwich.reviews.map(review => {
-    return <ReviewTile key={review.id} review={review} />
+    return (
+      <ReviewTile
+        key={review.id}
+        review={review}
+        user={props.user}
+        sandwich={sandwich}
+        setSandwich={setSandwich}
+      />
+    )
   })
 
   return (

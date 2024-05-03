@@ -23,4 +23,17 @@ sandwichReviewsRouter.post("/", async (req, res) => {
   }
 })
 
+sandwichReviewsRouter.delete("/", async (req, res) => {
+  try{
+    const { reviewId } = req.body
+    const review = await Review.query().findById(reviewId)
+    await review.$relatedQuery("votes").delete()
+    await Review.query().deleteById(reviewId)
+    res.status(200).json({})
+  } catch(error) {
+    console.log(error)
+    res.status(500).json({ error })
+  }
+})
+
 export default sandwichReviewsRouter

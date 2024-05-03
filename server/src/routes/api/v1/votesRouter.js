@@ -5,7 +5,7 @@ import Review from "../../../models/Review.js"
 const votesRouter = new express.Router()
 
 votesRouter.post("/", async (req, res) => {
-  try{
+  try {
     if (req.user) {
       const userId = parseInt(req.user.id)
       const reviewId = parseInt(req.body.reviewId)

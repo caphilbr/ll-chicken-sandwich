@@ -2,7 +2,7 @@ import React, { useState } from "react"
 
 const ReviewVotes = props => {
 
-  const [voteStatus, setVoteStatus] = useState(props.review.voteStatus)
+  const currentVoteStatus = props.review.voteStatus
   const [voteCount, setVoteCount] = useState(props.review.votes)
   const [showSignInMessage, setShowSignInMessage] = useState(false)
 
@@ -20,45 +20,58 @@ const ReviewVotes = props => {
       if (response.status === 401) {
         setShowSignInMessage(true)
       } else {
-        setVoteStatus(responseBody.voteStatus)
+        const allReviews = props.sandwich.reviews
+        allReviews.forEach(review => {
+          if (review.id === props.review.id) {
+            review.voteStatus = newStatus
+          } 
+        })
+        props.setSandwich({
+          ...props.sandwich,
+          reviews: allReviews
+        })
         setVoteCount(responseBody.voteCount)
       }
     } catch (error) {
-      res.status(500).json({ error })
+      console.log("Error in post request: ", error.message)
     }
   }
 
   const onUpVote = event => {
-    if (voteStatus === -1 || voteStatus === 0) {
+    if (currentVoteStatus === -1 || currentVoteStatus === 0) {
       postVote(1)
-    } else postVote(0)
+    } else {
+      postVote(0)
+    }
   }
 
   const onDownVote = event => {
-    if (voteStatus === 1 || voteStatus === 0) {
+    if (currentVoteStatus === 1 || currentVoteStatus === 0) {
       postVote(-1)
-    } else postVote(0)
+    } else {
+      postVote(0)
+    }
   }
 
   let upVoteClass = "greyVote"
   let downVoteClass = "greyVote"
 
-  if (voteStatus === 1) {
+  if (currentVoteStatus === 1) {
     upVoteClass = "greenVote"
   }
 
-  if (voteStatus === -1) {
+  if (currentVoteStatus === -1) {
     downVoteClass = "redVote"
   }
 
   let signinMessage
   if (showSignInMessage) {
-    signinMessage = "You must be signed in to vote"
+    signinMessage = <p>You must be signed in to vote</p>
   }
 
   return (
     <div className="like-statuses">
-      <p>{signinMessage}</p>
+      {signinMessage}
       <p onClick={onUpVote} className={upVoteClass}>Up : {voteCount.upVotes}</p>
       <p onClick={onDownVote} className={downVoteClass}>Down : {voteCount.downVotes}</p>
     </div>
