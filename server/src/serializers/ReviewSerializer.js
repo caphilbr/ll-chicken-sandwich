@@ -15,7 +15,6 @@ class ReviewSerializer {
       allowedReviewFields.forEach( async field => {
         serializedReview[field] = review[field]
       })
-
       const relatedVotes = await review.$relatedQuery("votes")
       if (!relatedVotes) {
         serializedReview.voteStatus = 0
@@ -27,10 +26,11 @@ class ReviewSerializer {
         serializedReview.voteStatus = relatedVotesByUser[0].voteStatus
         }
       }
-      serializedReview.votes = await review.voteCount(review.id)
+      serializedReview.votes = await review.voteCount()
+      const reviewUser = await review.$relatedQuery("user")
+      serializedReview.username = reviewUser.username
       return serializedReview
     }))
-
     return serializedReviews
   }
 }

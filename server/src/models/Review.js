@@ -12,9 +12,9 @@ class Review extends Model {
       properties: {
         title: { type: "string", minLength: 2, maxLength: 100 },
         body: { type: "string", minLength: 2, maxLength: 1000 },
-        starRating: { type: "integer", minimum: 1, maximum: 5 },
-        userId: { type: "integer" },
-        sandwichId: { type: "integer" }
+        starRating: { type: ["integer", "string"], minimum: 1, maximum: 5 },
+        userId: { type: ["integer", "string"] },
+        sandwichId: { type: ["integer", "string"] }
       }
     }
   }
