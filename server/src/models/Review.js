@@ -8,7 +8,7 @@ class Review extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["body", "starRating", "userId", "sandwichId"],
+      required: ["title", "body", "starRating", "userId", "sandwichId"],
       properties: {
         title: { type: "string", minLength: 2, maxLength: 100 },
         body: { type: "string", minLength: 2, maxLength: 1000 },
@@ -18,9 +18,28 @@ class Review extends Model {
       }
     }
   }
+  
+  async voteCount () {
+    let upVotes = 0
+    let downVotes = 0
+    const reviewVotes = await this.$relatedQuery("votes")
+    reviewVotes.forEach((vote) => {
+      if(vote.voteStatus == 1) {
+        upVotes++
+      }
+      if (vote.voteStatus == -1) {
+        downVotes++
+      }
+    })
+
+    return {
+      upVotes: upVotes,
+      downVotes: downVotes
+    }
+  }
 
   static get relationMappings() {
-    const { User, Sandwich } = require("./index.js")
+    const { User, Sandwich, Vote } = require("./index.js")
     return {
       user: {
         relation: Model.BelongsToOneRelation,
@@ -36,6 +55,14 @@ class Review extends Model {
         join: {
           from: "reviews.sandwichId",
           to: "sandwiches.id"
+        }
+      },
+      votes: {
+        relation: Model.HasManyRelation,
+        modelClass: Vote,
+        join: {
+          from: "reviews.id",
+          to: "votes.reviewId"
         }
       }
     }

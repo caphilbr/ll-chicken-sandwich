@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { connection } from "../boot.js";
-import { Sandwich, Review, User } from "../models/index.js"
+import { Sandwich, Review, User, Vote } from "../models/index.js"
 
 class Seeder {
   static async seed() {
@@ -57,6 +57,18 @@ class Seeder {
       starRating: 3,
       userId: 1,
       sandwichId: 1
+    })
+
+    await Vote.query().insert({
+      userId: 1,
+      reviewId: 1,
+      voteStatus: 1
+    })
+
+    await Vote.query().insert({
+      userId: 1,
+      reviewId: 2,
+      voteStatus: -1
     })
     
     console.log("Done!");

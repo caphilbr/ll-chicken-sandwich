@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import ReviewTile from './ReviewTile'
-import NewReviewForm from './NewReviewForm'
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import ReviewTile from "./ReviewTile";
+import NewReviewForm from "./NewReviewForm";
 
 const SandwichShow = (props) => {
   const [sandwich, setSandwich] = useState({
@@ -10,89 +10,93 @@ const SandwichShow = (props) => {
     restaurant: "",
     imgUrl: "",
     description: "",
-    reviews: []
-  })
-  const { id } = useParams()
-  const [showReviewForm, setShowReviewForm] =  useState(false)
-  const [showLogInMessage, setShowLogInMessage] = useState(false)
+    reviews: [],
+  });
+  const { id } = useParams();
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [showLogInMessage, setShowLogInMessage] = useState(false);
 
   const getSandwich = async () => {
     try {
-      const response = await fetch(`/api/v1/sandwiches/${id}`)
-      if(!response.ok) {
-        const errorMessage =
-          `Fetch error status ${response.status}: ${response.statusText}`
-        const newError = new Error(errorMessage)
-        throw(newError)
+      const response = await fetch(`/api/v1/sandwiches/${id}`);
+      if (!response.ok) {
+        const errorMessage = `Fetch error status ${response.status}: ${response.statusText}`;
+        const newError = new Error(errorMessage);
+        throw newError;
       } else {
-        const parsedData = await response.json()
-        setSandwich(parsedData.sandwich)
+        const parsedData = await response.json();
+        setSandwich(parsedData.sandwich);
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    getSandwich()
-  }, [])
+    getSandwich();
+  }, []);
 
-  const newReview = () => {
-    if(props.user){
+  const newReviewClick = () => {
+    if (props.user) {
       if (showReviewForm) {
-        setShowReviewForm(false)
+        setShowReviewForm(false);
       } else {
-        setShowReviewForm(true)
+        setShowReviewForm(true);
       }
     } else {
-      setShowReviewForm(false)
-      setShowLogInMessage(true)
+      setShowReviewForm(false);
+      setShowLogInMessage(true);
     }
-  }
+  };
 
-  const addReview = async (newReview) => {
+  const addReview = async (newReviewPayload) => {
     try {
       const response = await fetch(`/api/v1/sandwiches/${id}/reviews`, {
         method: "POST",
-        headers: new Headers ({
-          "Content-Type": "application/json"
+        headers: new Headers({
+          "Content-Type": "application/json",
         }),
-        body: JSON.stringify(newReview)
-      })
+        body: JSON.stringify(newReviewPayload),
+      });
       if (!response.ok) {
         if (response.status === 422) {
-          const errorBody = await response.json()
-          const newErrors = translateServerErrors(errorBody.errors)
-          return setErrors(newErrors)
+          const errorBody = await response.json();
+          const newErrors = translateServerErrors(errorBody.errors);
+          return setErrors(newErrors);
         } else {
-          const errorMessage = `${response.status} (${response.statusText})`
-          const error = new Error(errorMessage)
-          throw error
+          const errorMessage = `${response.status} (${response.statusText})`;
+          const error = new Error(errorMessage);
+          throw error;
         }
       } else {
-        const responseBody = await response.json()
-        const newReview = responseBody.review
+        const responseBody = await response.json();
+        const newReview = responseBody.review;
         setSandwich({
           ...sandwich,
-          reviews: [
-            ...sandwich.reviews,
-            newReview
-          ]
-        })
+          reviews: [...sandwich.reviews, newReview],
+        });
       }
     } catch (error) {
-      console.error(`Error in fetch: ${error.message}`)
+      console.error(`Error in fetch: ${error.message}`);
     }
-  }
+  };
 
-  let showDescription = null
+  let showDescription = null;
   if (sandwich.description) {
-    showDescription = <h4 className="cell small-6">Description: {sandwich.description}</h4>
+    showDescription = <h4 className="cell small-6">Description: {sandwich.description}</h4>;
   }
 
-  const reviewList = sandwich.reviews.map(review => {
-    return <ReviewTile key={review.id} review={review} />
-  })
+  const reviewList = sandwich.reviews.map((review) => {
+    return (
+      <ReviewTile
+        key={review.id}
+        review={review}
+        user={props.user}
+        sandwich={sandwich}
+        setSandwich={setSandwich}
+      />
+    );
+  });
 
   return (
     <>
@@ -102,14 +106,18 @@ const SandwichShow = (props) => {
         {showDescription}
       </div>
       <div className="form-container">
-        <p className="button" onClick={newReview}>Add Review</p>
-        { showLogInMessage ? <p>You need to be logged in to leave a review</p> : null}
-        { showReviewForm ? <NewReviewForm addReview={addReview}/> : null}
+        <p className="button" onClick={newReviewClick}>
+          Add Review
+        </p>
+        {showLogInMessage ? <p>You need to be logged in to leave a review</p> : null}
+        {showReviewForm ? (
+          <NewReviewForm setShowReviewForm={setShowReviewForm} addReview={addReview} />
+        ) : null}
       </div>
       <h4>Reviews</h4>
       {reviewList}
     </>
-  )
-}
+  );
+};
 
-export default SandwichShow
+export default SandwichShow;
