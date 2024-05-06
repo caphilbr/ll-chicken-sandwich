@@ -1,12 +1,9 @@
 import express from "express";
 import { ValidationError } from "objection";
-import userProfileRouter from "./userProfileRouter.js";
 
 import { User } from "../../../models/index.js";
 
 const usersRouter = new express.Router();
-
-usersRouter.use("/:id", userProfileRouter)
 
 usersRouter.post("/", async (req, res) => {
   const { email, password, username } = req.body;

@@ -33,7 +33,7 @@ const App = (props) => {
           <SandwichShow user={currentUser} />
         </Route>
         <Route exact path="/" component={SandwichList} />
-        <Route exact path="/user/:id/page">
+        <Route exact path="/user/page">
           <UserProfile user={currentUser}/>
         </Route>
         <Route exact path="/users/new" component={RegistrationForm} />

@@ -19,7 +19,7 @@ const TopBar = ({ user }) => {
   if (user) {
     userPage = (
       <li>
-        <Link to={`/user/${user.id}/page`}>Profile page</Link>
+        <Link to={`/user/page`}>Profile page</Link>
       </li>
     )
   } else {

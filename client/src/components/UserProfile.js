@@ -1,43 +1,27 @@
-import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import React from "react"
 
 const UserProfile = (props) => {
-  const { id } = useParams()
-  const [userInfo, setUserInfo] = useState({
-    id: "",
-    email: "",
-    cryptedPassword: "",
-    username: ""
-  })
-
-  const getProfile = async () => {
-    try {
-      const response = await fetch(`/api/v1/users/${id}/page`)
-      if(!response.ok) {
-        const errorMessage =
-          `Fetch error status ${response.status}: ${response.statusText}`
-        const newError = new Error(errorMessage)
-        throw(newError)
-      } else {
-        const parsedData = await response.json()
-        setUserInfo(parsedData.user)
-      }
-    } catch (error) {
-      console.log(error.message)
-    }
+  let user = {username:'', email:'', userId:''} 
+  
+  if (props.user){
+    user = {username: props.user.username, email: props.user.email, userId: props.user.userId}
   }
 
-  useEffect(() => {
-    getProfile()
-  }, [])
-  
+  let notLoggedIn = <h1>You need to be logged in to see this page.</h1>
+
+  const profilePage = (
+    <>  
+      <h1>{user.username}'s Homepage</h1>
+      <h4>Username:</h4>
+      <p>{user.username}</p>
+      <h4>Email:</h4>
+      <p>{user.email}</p>
+    </>
+  )
+
   return (
     <>
-      <h1>{userInfo.username}'s Homepage</h1>
-      <h4>Username:</h4>
-      <p>{userInfo.username}</p>
-      <h4>Email:</h4>
-      <p>{userInfo.email}</p>
+      {props.user ? profilePage : notLoggedIn}
     </>
   )
 }
