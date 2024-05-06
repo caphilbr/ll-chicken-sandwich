@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import ReviewVotes from './ReviewVotes'
 
 const ReviewTile = (props) => {
@@ -6,13 +6,10 @@ const ReviewTile = (props) => {
 
   const deleteReview = async () => {
     try {
-      const response = await fetch(`/api/v1/sandwiches/${props.review.sandwichId}/reviews`, {
-        method: "DELETE",
-        headers: new Headers ({
-          "Content-Type": "application/json"
-        }),
-        body: JSON.stringify({ reviewId: props.review.id })
-      })
+      const response = await fetch(
+        `/api/v1/reviews/${props.review.id}`,
+        { method: "DELETE" }
+      )
       if (response.ok) {
         const remainingReviews = props.sandwich.reviews.filter(review => {
           return review.id != props.review.id
