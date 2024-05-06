@@ -8,6 +8,7 @@ import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import SandwichShow from "./SandwichShow.js";
+import UserProfile from "./UserProfile.js";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -32,6 +33,9 @@ const App = (props) => {
           <SandwichShow user={currentUser} />
         </Route>
         <Route exact path="/" component={SandwichList} />
+        <Route exact path="/user/:id/page">
+          <UserProfile user={currentUser}/>
+        </Route>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
       </Switch>
