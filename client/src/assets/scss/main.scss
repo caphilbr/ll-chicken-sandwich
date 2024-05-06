@@ -45,9 +45,10 @@
 
 .review-tile {
   border: 1px solid black;
-  margin: 1rem;
+  margin: 1rem 0.5rem;
   padding: 0.5rem;
   font-size: larger;
+  background-color: white;
 }
 
 .border-right {
@@ -59,10 +60,16 @@
   margin-left: 1rem;
 }
 
-.show {
+.show-page {
+  background-color: rgb(224, 247, 255);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.show-header {
   border: 1px black solid;
   margin: 0.5rem;
-  background-color: lightblue;
+  background-color: white;
 }
 .review-tile p {
   margin: 0;
@@ -89,4 +96,8 @@
 
 .date {
   font-size: smaller;
+}
+
+.reviews-header {
+  text-indent: 0.5rem;
 }
