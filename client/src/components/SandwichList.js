@@ -15,8 +15,7 @@ const SandwichList = (props) => {
       const parsedData = await response.json()
       setSandwiches(parsedData.sandwiches)
     } catch(error) {
-      console.log("Error in the fetch request")
-      console.log(error)
+      console.error(`Error in fetch: ${error.message}`)
     }
   }
 
@@ -63,13 +62,12 @@ const SandwichList = (props) => {
     }
   }
 
-  const formQuestion = 
-    (
-        <>
-          <ErrorList errors={errors}/>
-          <SandwichForm addSandwich={addSandwich} setErrors={setErrors}/>
-        </>
-    )
+  const formQuestion = (
+    <>
+      <ErrorList errors={errors}/>
+      <SandwichForm addSandwich={addSandwich} setErrors={setErrors}/>
+    </>
+  )
 
   const sandwichList = sandwiches.map(sandwich => {
     return <SandwichTile key={sandwich.id} sandwich={sandwich}/>

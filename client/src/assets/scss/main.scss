@@ -13,6 +13,23 @@
   tab-size: 4;
 }
 
+.grey-vote {
+  color: gray;
+  cursor: pointer;
+}
+
+.green-vote {
+  color: green;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.red-vote {
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .bold {
   font-weight: bold;
 }

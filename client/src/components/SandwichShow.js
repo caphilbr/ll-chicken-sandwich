@@ -29,7 +29,7 @@ const SandwichShow = (props) => {
         setSandwich(parsedData.sandwich)
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error)
     }
   }
 
@@ -37,7 +37,7 @@ const SandwichShow = (props) => {
     getSandwich()
   }, [])
 
-  const newReview = () => {
+  const newReviewClick = () => {
     if(props.user){
       if (showReviewForm) {
         setShowReviewForm(false)
@@ -50,14 +50,14 @@ const SandwichShow = (props) => {
     }
   }
 
-  const addReview = async (newReview) => {
+  const addReview = async (newReviewPayload) => {
     try {
       const response = await fetch(`/api/v1/sandwiches/${id}/reviews`, {
         method: "POST",
         headers: new Headers ({
           "Content-Type": "application/json"
         }),
-        body: JSON.stringify(newReview)
+        body: JSON.stringify(newReviewPayload)
       })
       if (!response.ok) {
         if (response.status === 422) {
@@ -91,7 +91,15 @@ const SandwichShow = (props) => {
   }
 
   const reviewList = sandwich.reviews.map(review => {
-    return <ReviewTile key={review.id} review={review} />
+    return (
+      <ReviewTile
+        key={review.id}
+        review={review}
+        user={props.user}
+        sandwich={sandwich}
+        setSandwich={setSandwich}
+      />
+    )
   })
 
   return (
@@ -102,7 +110,7 @@ const SandwichShow = (props) => {
         {showDescription}
       </div>
       <div className="form-container">
-        <p className="button" onClick={newReview}>Add Review</p>
+        <p className="button" onClick={newReviewClick}>Add Review</p>
         { showLogInMessage ? <p>You need to be logged in to leave a review</p> : null}
         { showReviewForm ? <NewReviewForm addReview={addReview}/> : null}
       </div>

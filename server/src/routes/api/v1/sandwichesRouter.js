@@ -11,8 +11,12 @@ sandwichesRouter.use("/:id/reviews", sandwichReviewsRouter)
 
 sandwichesRouter.get("/:id", async (req, res) => {
   try {
+    let userId
+    if (req.user) {
+      userId = parseInt(req.user.id)
+    }
     const sandwich = await Sandwich.query().findById(req.params.id)
-    const serializedSandwich = await SandwichSerializer.summaryForShow(sandwich)
+    const serializedSandwich = await SandwichSerializer.summaryForShow(sandwich, userId)
     res.status(200).json({ sandwich: serializedSandwich })
   } catch(error) {
     res.status(500).json({ errors: error })
