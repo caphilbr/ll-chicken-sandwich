@@ -2,21 +2,17 @@ import React, { useState, useEffect } from 'react'
 import ReviewVotes from './ReviewVotes'
 
 const ReviewTile = (props) => {
-  const [showDeleteButton, setShowDeleteButton] = useState(false)
   const shortDate = (props.review.createdAt).slice(0, 10)
 
   const deleteReview = async () => {
     try {
-      const response = await fetch(
-        `/api/v1/sandwiches/${props.review.sandwichId}/reviews`,
-        {
-          method: "DELETE",
-          headers: new Headers ({
-            "Content-Type": "application/json"
-          }),
-          body: JSON.stringify({ reviewId: props.review.id })
-        }
-      )
+      const response = await fetch(`/api/v1/sandwiches/${props.review.sandwichId}/reviews`, {
+        method: "DELETE",
+        headers: new Headers ({
+          "Content-Type": "application/json"
+        }),
+        body: JSON.stringify({ reviewId: props.review.id })
+      })
       if (response.ok) {
         const remainingReviews = props.sandwich.reviews.filter(review => {
           return review.id != props.review.id
@@ -35,14 +31,8 @@ const ReviewTile = (props) => {
     deleteReview()
   }
 
-  useEffect(() => {
-    if (props.user && props.review.userId == props.user.id) {
-      setShowDeleteButton(true)
-    }
-  },[])
-  
   let deleteButton = null
-  if (showDeleteButton) {
+  if (props.user && props.review.userId == props.user.id) {
     deleteButton = (
       <p className="cell small-2 alert button" onClick={deleteClick}>
         Delete Review

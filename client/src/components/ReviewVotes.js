@@ -53,15 +53,15 @@ const ReviewVotes = props => {
     }
   }
 
-  let upVoteClass = "greyVote"
-  let downVoteClass = "greyVote"
+  let upVoteClass = "grey-vote"
+  let downVoteClass = "grey-vote"
 
   if (currentVoteStatus === 1) {
-    upVoteClass = "greenVote"
+    upVoteClass = "green-vote"
   }
 
   if (currentVoteStatus === -1) {
-    downVoteClass = "redVote"
+    downVoteClass = "red-vote"
   }
 
   let signinMessage
