@@ -17,6 +17,7 @@ const NewReviewForm = (props) => {
       body: "",
       starRating: ""
     })
+    props.setShowReviewForm(false)
   }
 
   const handleInputChange = (event) => {

@@ -72,8 +72,10 @@ const ReviewVotes = props => {
   return (
     <div className="like-statuses">
       {signinMessage}
-      <p onClick={onUpVote} className={upVoteClass}>Up : {voteCount.upVotes}</p>
-      <p onClick={onDownVote} className={downVoteClass}>Down : {voteCount.downVotes}</p>
+      <p>
+        <span onClick={onUpVote} className={upVoteClass}>Up : {voteCount.upVotes}</span>
+        <span onClick={onDownVote} className={downVoteClass}> | Down : {voteCount.downVotes}</span>
+      </p>
     </div>
   )
 }

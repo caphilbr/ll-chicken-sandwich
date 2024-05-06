@@ -1,8 +1,10 @@
-import React from 'react'
-import ReviewVotes from './ReviewVotes'
+import React, { useState } from "react";
+import ReviewVotes from "./ReviewVotes";
+import EditReviewForm from "./EditReviewForm";
 
 const ReviewTile = (props) => {
-  const shortDate = (props.review.createdAt).slice(0, 10)
+  const [showEdit, setShowEdit] = useState(false);
+  const shortDate = <p className="date">{props.review.createdAt.slice(0, 10)}</p>;
 
   const deleteReview = async () => {
     try {
@@ -11,48 +13,88 @@ const ReviewTile = (props) => {
         { method: "DELETE" }
       )
       if (response.ok) {
-        const remainingReviews = props.sandwich.reviews.filter(review => {
-          return review.id != props.review.id
-        })
+        const remainingReviews = props.sandwich.reviews.filter((review) => {
+          return review.id != props.review.id;
+        });
         props.setSandwich({
           ...props.sandwich,
-          reviews: remainingReviews
-        })
+          reviews: remainingReviews,
+        });
       }
-    } catch(error) {
-      console.log("Error in the delete request: ", error.message)
+    } catch (error) {
+      console.log("Error in the delete request: ", error.message);
     }
-  }
+  };
 
   const deleteClick = () => {
-    deleteReview()
+    deleteReview();
+  };
+
+  const editClick = () => {
+    setShowEdit(!showEdit);
+  };
+
+  let deleteButton = (
+    <p className="cell alert button small" onClick={deleteClick}>
+      Delete Review
+    </p>
+  );
+
+  let reviewButtonMessage = "Edit Review";
+  if (showEdit) {
+    reviewButtonMessage = "Cancel Edit";
+    deleteButton = null;
   }
 
-  let deleteButton = null
+  let editButton = (
+    <p className="cell button small" onClick={editClick}>
+      {reviewButtonMessage}
+    </p>
+  );
+
+  let deleteEditButtons = null;
   if (props.user && props.review.userId == props.user.id) {
-    deleteButton = (
-      <p className="cell small-2 alert button" onClick={deleteClick}>
-        Delete Review
-      </p>
-    )
+    deleteEditButtons = (
+      <>
+        {deleteButton}
+        {editButton}
+      </>
+    );
   }
+
+  const reviewContent = (
+    <>
+      <p>
+        {props.review.starRating} <span className="bold">{props.review.title}</span>
+      </p>
+      {shortDate}
+      <p className="review-body">{props.review.body}</p>
+    </>
+  );
 
   return (
     <div className="review-tile">
-      <div className="grid-x">
-        <p className="cell small-10">{props.review.username}</p>
-        {deleteButton}
+      <p>{props.review.username}</p>
+      <div className="review-main-section">
+        {showEdit ? (
+          <EditReviewForm
+            sandwich={props.sandwich}
+            setSandwich={props.setSandwich}
+            review={props.review}
+            setShowEdit={setShowEdit}
+          />
+        ) : (
+          reviewContent
+        )}
+        <ReviewVotes
+          review={props.review}
+          sandwich={props.sandwich}
+          setSandwich={props.setSandwich}
+        />
       </div>
-      <p>{props.review.starRating} <span className="bold">{props.review.title}</span></p>
-      <p>{shortDate}</p>
-      <p className="review-body">{props.review.body}</p>
-      <ReviewVotes
-        review={props.review}
-        sandwich={props.sandwich}
-        setSandwich={props.setSandwich}
-      />
+      <div className="grid-margin-x review-bottom-bar">{deleteEditButtons}</div>
     </div>
-  )
-}
+  );
+};
 
-export default ReviewTile
+export default ReviewTile;
