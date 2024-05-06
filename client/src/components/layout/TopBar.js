@@ -15,18 +15,11 @@ const TopBar = ({ user }) => {
       </Link>
     </li>,
   ];
-  let userPage
-  if (user) {
-    userPage = (
-      <li>
-        <Link to={`/user/page`}>Profile page</Link>
-      </li>
-    )
-  } else {
-    userPage = null
-  }
+
   const authenticatedListItems = [
-    userPage,
+    <li key="profile-page">
+        <Link to={`/user-profile`}>Profile page</Link>
+    </li>,
     <li key="sign-out">
       <SignOutButton />
     </li>
