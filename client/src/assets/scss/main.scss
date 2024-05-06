@@ -13,21 +13,24 @@
   tab-size: 4;
 }
 
-.greyVote {
-  color: gray;
+.grey-vote {
+  color: rgb(179, 179, 179);
   cursor: pointer;
+  font-size: smaller;
 }
 
-.greenVote {
+.green-vote {
   color: green;
   font-weight: bold;
   cursor: pointer;
+  font-size: smaller;
 }
 
-.redVote {
+.red-vote {
   color: red;
   font-weight: bold;
   cursor: pointer;
+  font-size: smaller;
 }
 
 .bold {
@@ -35,8 +38,9 @@
 }
 
 .review-body {
-  text-indent: 2rem;
+  text-indent: 1.5rem;
   font-size: smaller;
+  background-color: rgb(234, 250, 255);
 }
 
 .review-tile {
@@ -72,4 +76,17 @@
   border-radius: 2.5rem;
   height: max(8rem, auto);
   text-align: center;
+}
+
+.review-main-section {
+  border-top: 1px black solid;
+  border-bottom: 1px black solid;
+}
+
+.review-bottom-bar {
+  padding-top: 0.5rem;
+}
+
+.date {
+  font-size: smaller;
 }

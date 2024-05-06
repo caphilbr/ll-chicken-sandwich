@@ -53,15 +53,15 @@ const ReviewVotes = props => {
     }
   }
 
-  let upVoteClass = "greyVote"
-  let downVoteClass = "greyVote"
+  let upVoteClass = "grey-vote"
+  let downVoteClass = "grey-vote"
 
   if (currentVoteStatus === 1) {
-    upVoteClass = "greenVote"
+    upVoteClass = "green-vote"
   }
 
   if (currentVoteStatus === -1) {
-    downVoteClass = "redVote"
+    downVoteClass = "red-vote"
   }
 
   let signinMessage
@@ -72,8 +72,10 @@ const ReviewVotes = props => {
   return (
     <div className="like-statuses">
       {signinMessage}
-      <p onClick={onUpVote} className={upVoteClass}>Up : {voteCount.upVotes}</p>
-      <p onClick={onDownVote} className={downVoteClass}>Down : {voteCount.downVotes}</p>
+      <p>
+        <span onClick={onUpVote} className={upVoteClass}>Up : {voteCount.upVotes}</span>
+        <span onClick={onDownVote} className={downVoteClass}>  |  Down : {voteCount.downVotes}</span>
+      </p>
     </div>
   )
 }
