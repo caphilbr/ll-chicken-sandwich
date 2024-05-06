@@ -9,6 +9,7 @@ exports.up = async (knex) => {
   return knex.schema.createTable("reviews", (table) => {
     table.bigIncrements("id")
     table.string("title")
+      .notNullable()
     table.text("body")
       .notNullable()
     table.integer("starRating")

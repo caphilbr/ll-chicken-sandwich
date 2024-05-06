@@ -74,7 +74,7 @@ const ReviewVotes = props => {
       {signinMessage}
       <p>
         <span onClick={onUpVote} className={upVoteClass}>Up : {voteCount.upVotes}</span>
-        <span onClick={onDownVote} className={downVoteClass}>  |  Down : {voteCount.downVotes}</span>
+        <span onClick={onDownVote} className={downVoteClass}> | Down : {voteCount.downVotes}</span>
       </p>
     </div>
   )
