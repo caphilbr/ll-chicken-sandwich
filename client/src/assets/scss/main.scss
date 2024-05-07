@@ -1,7 +1,7 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
-// place global css here
+
 *,
 *::before,
 *::after {
@@ -38,7 +38,6 @@
 }
 
 .review-body {
-  text-indent: 1.5rem;
   font-size: smaller;
   background-color: rgb(234, 250, 255);
 }
@@ -47,7 +46,6 @@
   border: 1px solid black;
   margin: 1rem;
   padding: 0.5rem;
-  font-size: larger;
 }
 
 .border-right {
