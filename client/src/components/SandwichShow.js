@@ -99,8 +99,8 @@ const SandwichShow = (props) => {
   });
 
   return (
-    <>
-      <div className="grid-x grid-margin-x show">
+    <div className="show-page">
+      <div className="grid-x grid-margin-x show-header">
         <h2 className="cell small-12">{sandwich.name}</h2>
         <h4 className="cell small-6 border-right">Restaurant: {sandwich.restaurant}</h4>
         {showDescription}
@@ -114,9 +114,9 @@ const SandwichShow = (props) => {
           <NewReviewForm setShowReviewForm={setShowReviewForm} addReview={addReview} />
         ) : null}
       </div>
-      <h4>Reviews</h4>
+      <h4 className="reviews-header">Reviews</h4>
       {reviewList}
-    </>
+    </div>
   );
 };
 
