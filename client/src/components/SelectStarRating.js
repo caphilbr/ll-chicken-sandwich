@@ -12,11 +12,9 @@ const SelectStarRating = (props) => {
   }
 
   const starIcons = [1,2,3,4,5].map(starNumber => {
-    let starStyle
+    let starStyle = "fa-regular fa-star"
     if (props.reviewFormFields.starRating >= starNumber) {
       starStyle = "fa-solid fa-star"
-    } else {
-      starStyle = "fa-regular fa-star"
     }
     return (
       <FontAwesomeIcon

@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const ShowStarRating = (props) => {
 
   const starIcons = [1,2,3,4,5].map(starNumber => {
+    let starStyle = "fa-regular fa-star"
     if (props.rating >= starNumber) {
-      return <FontAwesomeIcon key={starNumber} icon="fa-solid fa-star" />
-    } else {
-      return <FontAwesomeIcon key={starNumber} icon="fa-regular fa-star" />
+      starStyle = "fa-solid fa-star"
     }
+    return <FontAwesomeIcon key={starNumber} icon={starStyle} />
   })
 
   return (
