@@ -74,7 +74,7 @@ const SandwichList = (props) => {
   })
 
   return (
-    <div className="grid-x grid-padding-x grid-padding-y list-page">
+    <div className="grid-x grid-padding-x grid-padding-y background-color">
       <div className="cell small-12">
         <p className="button" onClick={toggleFormOnClick}>Add Sandwich</p>
         {showForm ? formQuestion : null}

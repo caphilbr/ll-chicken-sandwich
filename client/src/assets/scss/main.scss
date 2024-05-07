@@ -14,6 +14,10 @@
   tab-size: 4;
 }
 
+.background-color {
+  background-color: rgb(224, 247, 255);
+}
+
 .grey-vote {
   color: rgb(179, 179, 179);
   cursor: pointer;
@@ -50,6 +54,7 @@
   padding: 0.5rem;
   font-size: larger;
   background-color: white;
+  border-radius: 0.5rem;
 }
 
 .border-right {
@@ -71,6 +76,7 @@
   border: 1px black solid;
   margin: 0.5rem;
   background-color: white;
+  border-radius: .75rem;
 }
 .review-tile p {
   margin: 0;
@@ -81,9 +87,10 @@
 }
 
 .sandwich-tile {
-  border-radius: 2.5rem;
+  border-radius: 1.5rem;
   height: max(8rem, auto);
   text-align: center;
+  background-color: white;
 }
 
 .review-main-section {
@@ -101,8 +108,4 @@
 
 .reviews-header {
   text-indent: 0.5rem;
-}
-
-.list-page {
-  background-color: rgb(224, 247, 255);
 }
