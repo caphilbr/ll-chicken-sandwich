@@ -55,11 +55,6 @@ const EditReviewForm = (props) => {
   const submitForm = (event) => {
     event.preventDefault()
     editReview()
-    setReviewFormFields({
-      title: "",
-      body: "",
-      starRating: ""
-    })
   }
 
   const handleInputChange = (event) => {
