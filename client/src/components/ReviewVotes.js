@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const ReviewVotes = props => {
 
@@ -53,28 +54,29 @@ const ReviewVotes = props => {
     }
   }
 
-  let upVoteClass = "grey-vote"
-  let downVoteClass = "grey-vote"
+  let thumbsUpClass = "fa-regular fa-thumbs-up"
+  let thumbsDownClass = "fa-regular fa-thumbs-down"
 
   if (currentVoteStatus === 1) {
-    upVoteClass = "green-vote"
+    thumbsUpClass = "fa-solid fa-thumbs-up"
   }
 
   if (currentVoteStatus === -1) {
-    downVoteClass = "red-vote"
+    thumbsDownClass = "fa-solid fa-thumbs-down"
   }
 
   let signinMessage
   if (showSignInMessage) {
     signinMessage = <p>You must be signed in to vote</p>
   }
-
+  
   return (
     <div className="like-statuses">
       {signinMessage}
       <p>
-        <span onClick={onUpVote} className={upVoteClass}>Up : {voteCount.upVotes}</span>
-        <span onClick={onDownVote} className={downVoteClass}> | Down : {voteCount.downVotes}</span>
+        <FontAwesomeIcon icon={thumbsUpClass} onClick={onUpVote}/>
+        <span > {voteCount.upVotes} | {voteCount.downVotes} </span>
+        <FontAwesomeIcon icon={thumbsDownClass} onClick={onDownVote}/>
       </p>
     </div>
   )
