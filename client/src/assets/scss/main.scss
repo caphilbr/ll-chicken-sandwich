@@ -13,30 +13,6 @@
   tab-size: 4;
 }
 
-.background-color {
-  background-color: rgb(224, 247, 255);
-}
-
-.grey-vote {
-  color: rgb(179, 179, 179);
-  cursor: pointer;
-  font-size: smaller;
-}
-
-.green-vote {
-  color: green;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: smaller;
-}
-
-.red-vote {
-  color: red;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: smaller;
-}
-
 .bold {
   font-weight: bold;
 }
@@ -104,6 +80,6 @@
   font-size: smaller;
 }
 
-.reviews-header {
-  text-indent: 0.5rem;
+.fa-thumbs-up, .fa-thumbs-down {
+  cursor: pointer;
 }
