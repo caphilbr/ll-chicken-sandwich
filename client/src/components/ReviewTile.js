@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReviewVotes from "./ReviewVotes";
 import EditReviewForm from "./EditReviewForm";
+import ShowStarRating from "./ShowStarRating";
 
 const ReviewTile = (props) => {
   const [showEdit, setShowEdit] = useState(false);
@@ -65,7 +66,8 @@ const ReviewTile = (props) => {
   const reviewContent = (
     <>
       <p>
-        {props.review.starRating} <span className="bold">{props.review.title}</span>
+        <ShowStarRating rating={props.review.starRating} />
+        <span className="bold"> {props.review.title}</span>
       </p>
       {shortDate}
       <p className="review-body">{props.review.body}</p>

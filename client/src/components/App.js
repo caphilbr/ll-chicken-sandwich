@@ -10,9 +10,6 @@ import TopBar from "./layout/TopBar";
 import SandwichShow from "./SandwichShow.js";
 import UserProfile from "./UserProfile.js";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { far } from '@fortawesome/free-regular-svg-icons'
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -46,5 +43,3 @@ const App = (props) => {
 };
 
 export default hot(App);
-
-library.add(fas, far)
