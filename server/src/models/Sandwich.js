@@ -24,6 +24,22 @@ class Sandwich extends unique(Model) {
     }
   }
 
+  async $averageRating() {
+    let sum = 0
+    let average = 0
+    const reviews = await this.$relatedQuery("reviews")
+    if (reviews.length !== 0) {
+      const ratingsArray = reviews.map(review => {
+        return review.starRating
+      })
+      ratingsArray.forEach(rating => {
+        sum += rating
+      })
+      average = sum/ratingsArray.length
+    }
+    return average
+  }
+
   static get relationMappings() {
     const { Review } = require("./index.js")
     return {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReviewTile from "./ReviewTile";
 import NewReviewForm from "./NewReviewForm";
+import ShowStarAverage from "./ShowStarAverage";
 
 const SandwichShow = (props) => {
   const [sandwich, setSandwich] = useState({
@@ -72,7 +73,7 @@ const SandwichShow = (props) => {
         const responseBody = await response.json();
         const newReview = responseBody.review;
         setSandwich({
-          ...sandwich,
+          ...responseBody.sandwich,
           reviews: [...sandwich.reviews, newReview],
         });
       }
@@ -98,10 +99,17 @@ const SandwichShow = (props) => {
     );
   });
 
+  const roundHalf = (num) => {
+    return Math.round(num*2)/2
+  }
+
+  let roundedAverage = roundHalf(sandwich.averageRating)
+  
   return (
     <div className="show-page">
       <div className="grid-x grid-margin-x show-header">
-        <h2 className="cell small-12">{sandwich.name}</h2>
+        <h2 className="cell small-8">{sandwich.name}</h2>
+        <span className="avg-rating">Average Rating: <ShowStarAverage roundedAverage={roundedAverage}/></span>
         <h4 className="cell small-6 border-right">Restaurant: {sandwich.restaurant}</h4>
         {showDescription}
       </div>
