@@ -1,7 +1,7 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
-// place global css here
+
 *,
 *::before,
 *::after {
@@ -11,6 +11,10 @@
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
+}
+
+.background-color {
+  background-color: rgb(224, 247, 255);
 }
 
 .grey-vote {
@@ -38,16 +42,17 @@
 }
 
 .review-body {
-  text-indent: 1.5rem;
   font-size: smaller;
   background-color: rgb(234, 250, 255);
 }
 
 .review-tile {
   border: 1px solid black;
-  margin: 1rem;
+  margin: 1rem 0.5rem;
   padding: 0.5rem;
   font-size: larger;
+  background-color: white;
+  border-radius: 0.5rem;
 }
 
 .border-right {
@@ -59,10 +64,17 @@
   margin-left: 1rem;
 }
 
-.show {
+.show-page {
+  background-color: rgb(224, 247, 255);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.show-header {
   border: 1px black solid;
   margin: 0.5rem;
-  background-color: lightblue;
+  background-color: white;
+  border-radius: .75rem;
 }
 .review-tile p {
   margin: 0;
@@ -73,9 +85,10 @@
 }
 
 .sandwich-tile {
-  border-radius: 2.5rem;
+  border-radius: 1.5rem;
   height: max(8rem, auto);
   text-align: center;
+  background-color: white;
 }
 
 .review-main-section {
@@ -92,6 +105,9 @@
 }
 
 .profile-photo {
-  // max-height: 33px;
   max-height: 15rem;
+}
+
+.reviews-header {
+  text-indent: 0.5rem;
 }

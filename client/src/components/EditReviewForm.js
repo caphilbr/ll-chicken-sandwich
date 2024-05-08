@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import translateServerErrors from './../services/translateServerErrors.js'
 import ErrorList from './ErrorList.js'
+import SelectStarRating from './SelectStarRating.js'
 
 const EditReviewForm = (props) => {
 
@@ -54,11 +55,6 @@ const EditReviewForm = (props) => {
   const submitForm = (event) => {
     event.preventDefault()
     editReview()
-    setReviewFormFields({
-      title: "",
-      body: "",
-      starRating: ""
-    })
   }
 
   const handleInputChange = (event) => {
@@ -72,14 +68,26 @@ const EditReviewForm = (props) => {
     <>
       <ErrorList errors={errors}/>
       <form onSubmit={submitForm}>
-        <label> Star Rating:
-          <input type='text' name='starRating' onChange={handleInputChange} value={reviewFormFields.starRating} />
-        </label>
+        <label> Star Rating:</label>
+          <SelectStarRating
+            reviewFormFields={reviewFormFields}
+            setReviewFormFields={setReviewFormFields}
+          />
         <label> Title:
-          <input type='text' name='title' onChange={handleInputChange} value={reviewFormFields.title} />
+          <input
+            type='text'
+            name='title'
+            onChange={handleInputChange}
+            value={reviewFormFields.title}
+            />
         </label>
         <label> Body:
-          <input type='text' name='body' onChange={handleInputChange} value={reviewFormFields.body} />
+          <input
+          type='text'
+          name='body'
+          onChange={handleInputChange}
+          value={reviewFormFields.body}
+          />
         </label>
         <input className="button small" type='submit' value='Submit' />
       </form>

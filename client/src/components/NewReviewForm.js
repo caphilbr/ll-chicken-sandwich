@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import SelectStarRating from './SelectStarRating'
 
 const NewReviewForm = (props) => {
 
@@ -6,7 +7,7 @@ const NewReviewForm = (props) => {
     id: "",
     title: "",
     body: "",
-    starRating: ""
+    starRating: 1
   })
 
   const submitForm = (event) => {
@@ -30,14 +31,13 @@ const NewReviewForm = (props) => {
   return(
     <>
       <form onSubmit={submitForm}>
+        <label> Star Rating:</label>
+        <SelectStarRating reviewFormFields={reviewFormFields} setReviewFormFields={setReviewFormFields} />
         <label> Title:
           <input type='text' name='title' onChange={handleInputChange} value={reviewFormFields.title} />
         </label>
         <label> Body:
           <input type='text' name='body' onChange={handleInputChange} value={reviewFormFields.body} />
-        </label>
-        <label> Star Rating:
-          <input type='text' name='starRating' onChange={handleInputChange} value={reviewFormFields.starRating} />
         </label>
         <input className="button" type='submit' value='Submit' />
       </form>
