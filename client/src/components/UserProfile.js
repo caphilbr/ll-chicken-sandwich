@@ -6,7 +6,7 @@ const UserProfile = ({ user }) => {
   const [newUserPhotoFormData, setNewUserPhotoFormData] = useState({
     image: {}
   })
-
+  
   const getUserPhoto = async () => {
     try {
         const response = await fetch("/api/v1/user-photos")
@@ -27,7 +27,10 @@ const UserProfile = ({ user }) => {
   }, [])
 
   const handleUserPhotoUpload = (acceptedImage) => {
-    setNewUserPhotoFormData({ image: acceptedImage[0] })
+    setNewUserPhotoFormData({
+      ...newUserPhotoFormData,
+      image: acceptedImage[0]
+    })
   }
 
   const addUserPhoto = async (event) => {
@@ -52,30 +55,47 @@ const UserProfile = ({ user }) => {
       console.error(`Error in addUserPhoto Fetch: ${error.message}`)
     }
   }
+
+  let uploadButton = null
+  let uploadMessage = "Click here to select a photo to use as your profile picture"
+  let fileStyle = "select-file-box"
+  if (newUserPhotoFormData.image.name) {
+    uploadMessage = newUserPhotoFormData.image.name
+    uploadButton = <input className="button" type="submit" value="Upload Photo" />
+    fileStyle = "show-file-box"
+  }
+
+  let profilePic = <span className="no-profile-photo">No profile picture uploaded yet...</span>
+  if (userPhoto != "") {
+    profilePic = <img src={userPhoto} className="profile-photo" />
+  }
+
   return (
     <>
       {user ? 
       <>
-        <img src={userPhoto} className="profile-photo" />
+        {profilePic}
+        <form onSubmit={addUserPhoto}>
+          <div className={fileStyle} >
+            <Dropzone onDrop={handleUserPhotoUpload}>
+              {({getRootProps, getInputProps}) => (
+                <section>
+                  <div {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    <p>{uploadMessage}</p>
+                  </div>
+                </section>
+              )}
+            </Dropzone>
+          </div>
+          {uploadButton}
+        </form>
         <h1>{user.username}'s Homepage</h1>
         <h4>Username:</h4>
         <p>{user.username}</p>
         <h4>Email:</h4>
         <p>{user.email}</p>
       </> : <h1>You need to be logged in to see this page.</h1>}
-      <form className="callout primary" onSubmit={addUserPhoto}>    
-        <Dropzone onDrop={handleUserPhotoUpload}>
-          {({getRootProps, getInputProps}) => (
-            <section>
-              <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <p>Upload Your UserPhoto - drag 'n' drop or click to upload</p>
-              </div>
-            </section>
-          )}
-        </Dropzone>
-        <input className="button" type="submit" value="Add" />
-      </form>
     </>
   )
 }

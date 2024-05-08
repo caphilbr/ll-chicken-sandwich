@@ -24,7 +24,7 @@ userPhotosRouter.get("/", async (req, res) => {
 
 userPhotosRouter.post("/", uploadImage.single("image"), async (req, res) => {
   try {
-    if (req.user) {
+    if (req.user) {      
       const currentUserNewPhoto = {
         ...req.user,
         image: req.file.location
