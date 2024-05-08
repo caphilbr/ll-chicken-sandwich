@@ -80,6 +80,47 @@
   font-size: smaller;
 }
 
+.profile-photo {
+  max-height: 15rem;
+  border: 1px rgb(117, 117, 117) solid
+}
+
+.no-profile-photo {
+  height: 15rem;
+  padding: 1rem;
+  background-color: lightgrey;
+  display: inline-block;
+  line-height: 15rem;
+  color: rgb(138, 138, 138)
+}
+
+.reviews-header {
+  text-indent: 0.5rem;
+}
+
+.select-file-box {
+  width: 15rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+  margin-top: 0.25rem;
+  cursor: pointer;
+  padding: 0.15rem;
+  background-color: rgb(23, 121, 186);
+  color: white;
+  font-weight: bold;
+}
+
+.show-file-box {
+  width: 15rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+  margin-top: 0.25rem;
+  cursor: pointer;
+  padding: 0.15rem;
+  font-weight: bold;
+  border: 1px black solid;
+}
+
 .fa-thumbs-up, .fa-thumbs-down {
   cursor: pointer;
 }
