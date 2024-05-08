@@ -24,7 +24,7 @@ class Sandwich extends unique(Model) {
     }
   }
 
-  async averageRating() {
+  async $averageRating() {
     let sum = 0
     let average = 0
     const reviews = await this.$relatedQuery("reviews")
@@ -33,10 +33,10 @@ class Sandwich extends unique(Model) {
         return review.starRating
       })
       ratingsArray.forEach(rating => {
-        sum = sum + rating
+        sum += rating
       })
-      average = (sum/ratingsArray.length)
-    } else average = 0
+      average = sum/ratingsArray.length
+    }
     return average
   }
 

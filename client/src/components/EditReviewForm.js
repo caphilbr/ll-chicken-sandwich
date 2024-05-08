@@ -42,7 +42,7 @@ const EditReviewForm = (props) => {
           }
         });
         props.setSandwich({
-          ...props.sandwich,
+          ...parsedData.sandwich,
           reviews: updatedReviews,
         })
         props.setShowEdit(false)

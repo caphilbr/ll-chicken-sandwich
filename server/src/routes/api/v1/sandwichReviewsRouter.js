@@ -1,6 +1,8 @@
 import express from "express";
 import { Review } from "../../../models/index.js"
-import cleanUserInput from "../../../services/cleanUserInput.js";
+import cleanUserInput from "../../../Services/cleanUserInput.js";
+import { Sandwich } from "../../../models/index.js";
+import SandwichSerializer from "../../../serializers/SandwichSerializer.js";
 
 const sandwichReviewsRouter = new express.Router({ mergeParams: true })
 
@@ -17,8 +19,11 @@ sandwichReviewsRouter.post("/", async (req, res) => {
     newReview.username = req.user.username
     newReview.voteStatus = 0
     newReview.votes = { upVotes: 0, downVotes: 0 }
-    return res.status(201).json({ review: newReview })
+    const sandwich = await Sandwich.query().findById(newReview.sandwichId)
+    const serializedSandwich = await SandwichSerializer.summaryForShow(sandwich, req.user.id)
+    return res.status(201).json({ review: newReview, sandwich: serializedSandwich })
   } catch(error) {
+    console.log(error)
     res.status(500).json({ error:error })
   }
 })

@@ -30,7 +30,7 @@ class SandwichSerializer {
       relatedReviews,
       userId
     )
-    serializedSandwich.averageRating = await sandwich.averageRating()
+    serializedSandwich.averageRating = await sandwich.$averageRating()
     return serializedSandwich
   }
 }
