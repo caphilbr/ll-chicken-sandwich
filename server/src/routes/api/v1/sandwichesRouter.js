@@ -38,6 +38,7 @@ sandwichesRouter.post("/", async (req, res) => {
     const { body } = req
     const formInput = cleanUserInput(body)
     const newSandwich = await Sandwich.query().insertAndFetch(formInput)
+    newSandwich.averageRating = 0
     res.status(201).json({ newSandwich })
   } catch (error) {
     if (error instanceof ValidationError) {

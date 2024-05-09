@@ -51,6 +51,7 @@
   margin: 0.5rem;
   background-color: white;
   border-radius: .75rem;
+  padding-top: 1rem;
 }
 .review-tile p {
   margin: 0;
@@ -96,6 +97,7 @@
 
 .reviews-header {
   text-indent: 0.5rem;
+  font-weight: bold;
 }
 
 .select-file-box {
@@ -152,3 +154,22 @@
 .dropdown-content p:hover {
   background-color: lightgray;
 }
+
+.sandwich-list-pic {
+  border-radius: 100%;
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+}
+
+.sandwich-show-pic {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+}
+
+.no-sandwich-photo {
+  font-size: smaller;
+  color: rgb(138, 138, 138)
+}
+

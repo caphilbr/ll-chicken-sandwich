@@ -2,7 +2,7 @@ import ReviewSerializer from "./ReviewSerializer.js"
 
 class SandwichSerializer {
   static summaryForIndex = async sandwiches => {
-    const allowedFields = ["id", "name", "restaurant"]
+    const allowedFields = ["id", "name", "restaurant", "imgUrl"]
     const serializedSandwiches = Promise.all(sandwiches.map(async sandwich => {
       const serializedSandwich = {}
       allowedFields.forEach(field => {
