@@ -104,12 +104,14 @@ const SandwichShow = (props) => {
   }
 
   let roundedAverage = roundHalf(sandwich.averageRating)
-  
+  let average = parseFloat(sandwich.averageRating)
+  let fixedAverage = average.toFixed(2)
+
   return (
     <div className="show-page">
       <div className="grid-x grid-margin-x show-header">
         <h2 className="cell small-8">{sandwich.name}</h2>
-        <span className="avg-rating">Average Rating: <ShowStarAverage roundedAverage={roundedAverage}/></span>
+        <span className="avg-rating">Average Rating: <ShowStarAverage roundedAverage={roundedAverage}/> {fixedAverage}</span>
         <h4 className="cell small-6 border-right">Restaurant: {sandwich.restaurant}</h4>
         {showDescription}
       </div>
