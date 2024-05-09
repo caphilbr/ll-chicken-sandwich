@@ -32,7 +32,15 @@ class Seeder {
     await User.query().insert({
       email: "testUser@email.com",
       username: "testUser",
-      cryptedPassword: "password"
+      cryptedPassword: "$2b$10$0QWLysuv4WG15tVgNyOEeu9zRt2eKv3RAfja0KCRho7HGt17N/tm6",
+      image: "https://tracywrightcorvo.com/wp-content/uploads/2018/01/cindy_ramirez-115r.jpg"
+    })
+
+    await User.query().insert({
+      email: "tester@email.com",
+      username: "tester",
+      cryptedPassword: "$2b$10$0QWLysuv4WG15tVgNyOEeu9zRt2eKv3RAfja0KCRho7HGt17N/tm6",
+      image: "https://images.squarespace-cdn.com/content/v1/5cfb0f8783523500013c5639/b29b7df0-d313-46aa-a7eb-16704edb2492/Professional-Headshot-Vancouver"
     })
     
     await Review.query().insert({
@@ -59,6 +67,22 @@ class Seeder {
       sandwichId: 1
     })
 
+    await Review.query().insert({
+      title: "it was decent",
+      body: "pretty average",
+      starRating: 3,
+      userId: 2,
+      sandwichId: 2
+    })
+
+    await Review.query().insert({
+      title: "bleh",
+      body: "hated it",
+      starRating: 2,
+      userId: 2,
+      sandwichId: 2
+    })
+
     await Vote.query().insert({
       userId: 1,
       reviewId: 1,
@@ -67,6 +91,18 @@ class Seeder {
 
     await Vote.query().insert({
       userId: 1,
+      reviewId: 2,
+      voteStatus: -1
+    })
+
+    await Vote.query().insert({
+      userId: 2,
+      reviewId: 1,
+      voteStatus: 1
+    })
+    
+    await Vote.query().insert({
+      userId: 2,
       reviewId: 2,
       voteStatus: -1
     })
