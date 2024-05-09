@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import _ from 'lodash'
 
 const SandwichForm = (props) => {
   const [sandwich, setSandwich] = useState({
@@ -27,14 +28,9 @@ const SandwichForm = (props) => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault()
-    props.addSandwich(sandwich)
-    setSandwich({
-      name: "",
-      restaurant: "",
-      description: "",
-      imageURL: ""
-    })
+    props.addSandwich(sandwich) 
   }
+  
 
   return (
     <form className="form-container" onSubmit={onSubmitHandler}>

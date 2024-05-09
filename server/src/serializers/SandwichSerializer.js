@@ -1,15 +1,16 @@
 import ReviewSerializer from "./ReviewSerializer.js"
 
 class SandwichSerializer {
-  static summaryForIndex = (sandwiches) => {
-    const allowedFields = ["id", "name", "restaurant"]
-    const serializedSandwiches = sandwiches.map(sandwich => {
+  static summaryForIndex = async sandwiches => {
+    const allowedFields = ["id", "name", "restaurant", "imgUrl"]
+    const serializedSandwiches = Promise.all(sandwiches.map(async sandwich => {
       const serializedSandwich = {}
       allowedFields.forEach(field => {
         serializedSandwich[field] = sandwich[field]
       })
+      serializedSandwich.averageRating = await sandwich.$averageRating()
       return serializedSandwich
-    })
+    }))
     return serializedSandwiches 
   }
   
@@ -30,6 +31,7 @@ class SandwichSerializer {
       relatedReviews,
       userId
     )
+    serializedSandwich.averageRating = await sandwich.$averageRating()
     return serializedSandwich
   }
 }

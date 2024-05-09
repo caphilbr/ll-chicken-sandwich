@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReviewTile from "./ReviewTile";
 import NewReviewForm from "./NewReviewForm";
+import ShowStarAverage from "./ShowStarAverage";
+import ErrorList from "./ErrorList";
+import translateServerErrors from "../services/translateServerErrors";
+import roundHalf from "../services/roundToHalf";
 
 const SandwichShow = (props) => {
   const [sandwich, setSandwich] = useState({
@@ -15,6 +19,7 @@ const SandwichShow = (props) => {
   const { id } = useParams();
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [showLogInMessage, setShowLogInMessage] = useState(false);
+  const [errors, setErrors] = useState({})
 
   const getSandwich = async () => {
     try {
@@ -72,9 +77,11 @@ const SandwichShow = (props) => {
         const responseBody = await response.json();
         const newReview = responseBody.review;
         setSandwich({
-          ...sandwich,
+          ...responseBody.sandwich,
           reviews: [...sandwich.reviews, newReview],
-        });
+        })
+        setErrors({})
+        setShowReviewForm(false)
       }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
@@ -83,7 +90,7 @@ const SandwichShow = (props) => {
 
   let showDescription = null;
   if (sandwich.description) {
-    showDescription = <h4 className="cell small-6">Description: {sandwich.description}</h4>;
+    showDescription = <h4 className="cell small-6"><span className="bold">Description: </span>{sandwich.description}</h4>;
   }
 
   const reviewList = sandwich.reviews.map((review) => {
@@ -98,20 +105,36 @@ const SandwichShow = (props) => {
     );
   });
 
+  const roundedAverage = roundHalf(sandwich.averageRating)
+  const average = parseFloat(sandwich.averageRating)
+  const fixedAverage = average.toFixed(2)
+
+  let sandwichPic = <span className="no-sandwich-photo">No sandwich picture uploaded yet...</span>
+  if (sandwich.imgUrl) {
+    sandwichPic = <img className="small-8 medium-9 large-11 sandwich-show-pic" src={sandwich.imgUrl}></img>
+  }
   return (
     <div className="show-page">
-      <div className="grid-x grid-margin-x show-header">
-        <h2 className="cell small-12">{sandwich.name}</h2>
-        <h4 className="cell small-6 border-right">Restaurant: {sandwich.restaurant}</h4>
+      <div className="grid-x grid-margin-x show-header grid-margin-y">
+        <div className="cell small-2 grid-x">
+          {sandwichPic}
+        </div>
+        <h2 className="cell small-6 bold">{sandwich.name}</h2>
+        <div className="cell small-4 grid-x">
+          <span className="cell medium-12 large-6">Average Rating: </span>
+          <span className="cell medium-12 large-6"><ShowStarAverage roundedAverage={roundedAverage}/>{fixedAverage}</span>
+        </div>
+        <h4 className="cell small-6 border-right"><span className="bold">Restaurant: </span>{sandwich.restaurant}</h4>
         {showDescription}
       </div>
       <div className="form-container">
         <p className="button" onClick={newReviewClick}>
           Add Review
         </p>
+      <ErrorList errors={errors} />
         {showLogInMessage ? <p>You need to be logged in to leave a review</p> : null}
         {showReviewForm ? (
-          <NewReviewForm setShowReviewForm={setShowReviewForm} addReview={addReview} />
+          <NewReviewForm setShowReviewForm={setShowReviewForm} addReview={addReview} setErrors={setErrors}/>
         ) : null}
       </div>
       <h4 className="reviews-header">Reviews</h4>

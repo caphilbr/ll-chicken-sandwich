@@ -8,6 +8,7 @@ const SandwichList = (props) => {
   const [sandwiches, setSandwiches] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [errors, setErrors] = useState({})
+  const [showDropDown, setShowDropDown] = useState(false)
 
   const getSandwiches = async () => {
     try {
@@ -44,6 +45,8 @@ const SandwichList = (props) => {
         ...sandwiches,
         responseBody.newSandwich
       ])
+      setErrors({})
+      setShowForm(false)
     }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
@@ -65,19 +68,57 @@ const SandwichList = (props) => {
   const formQuestion = (
     <>
       <ErrorList errors={errors}/>
-      <SandwichForm addSandwich={addSandwich} setErrors={setErrors}/>
+      <SandwichForm addSandwich={addSandwich} errors={errors} setErrors={setErrors} />
     </>
   )
+
+  const toggleDropDown = () => {
+    setShowDropDown(!showDropDown)
+  }
+
+  const sortBy = (event) => {
+    const value = event.currentTarget.getAttribute("value")
+    if (value === "ratingHighest") {
+      setSandwiches(sandwiches.toSorted((a,b) => {
+        return b["averageRating"] - a["averageRating"]
+      }))
+    } else if (value === "ratingLowest") {
+      setSandwiches(sandwiches.toSorted((a,b) => {
+        return a["averageRating"] - b["averageRating"]
+      }))
+    } else {
+      setSandwiches(sandwiches.toSorted((a,b) => {
+        return a[value].localeCompare(b[value])
+      }))
+    }
+  }
+
+  let dropDownStyle = "dropdown-content-hidden"
+  if (showDropDown) {
+    dropDownStyle = "dropdown-content"
+  }
 
   const sandwichList = sandwiches.map(sandwich => {
     return <SandwichTile key={sandwich.id} sandwich={sandwich}/>
   })
 
   return (
-    <div className="grid-x grid-padding-x grid-padding-y list-background-color">
+    <div className="grid-x grid-padding-x grid-padding-y grid-margin-x list-background-color">
       <div className="cell small-12">
-        <p className="button" onClick={toggleFormOnClick}>Add Sandwich</p>
         {showForm ? formQuestion : null}
+      </div>
+      <div className="cell small-12 grid-x">
+        <p className="button cell small-3" onClick={toggleFormOnClick}>Add Sandwich</p>
+        <div className="cell small-6"></div>
+        <div className="cell small-3">
+          <p onClick={toggleDropDown} className="dropdown button">Sort by</p>
+          <div onMouseLeave={toggleDropDown} id="myDropdown" className={dropDownStyle}>
+            <p className="drop-down-item" onClick={sortBy} value="ratingHighest">Rating (High to Low)</p>
+            <p className="drop-down-item" onClick={sortBy} value="ratingLowest">Rating (Low to High)</p>
+            <p className="drop-down-item" onClick={sortBy} value="restaurant">Restaurant Name</p>
+            <p className="drop-down-item" onClick={sortBy} value="name">Sandwich Name</p>
+          </div>
+        </div>  
       </div>
       <div className="cell small-12 grid-x grid-margin-x">
         {sandwichList}

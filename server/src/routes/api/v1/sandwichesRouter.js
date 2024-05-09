@@ -26,7 +26,7 @@ sandwichesRouter.get("/:id", async (req, res) => {
 sandwichesRouter.get("/", async (req, res) => {
   try {
     const sandwiches = await Sandwich.query()
-    const serializedSandwiches = SandwichSerializer.summaryForIndex(sandwiches)
+    const serializedSandwiches = await SandwichSerializer.summaryForIndex(sandwiches)
     res.status(200).json({ sandwiches: serializedSandwiches })
   } catch(error) {
     res.status(500).json({ errors: error })
@@ -38,6 +38,7 @@ sandwichesRouter.post("/", async (req, res) => {
     const { body } = req
     const formInput = cleanUserInput(body)
     const newSandwich = await Sandwich.query().insertAndFetch(formInput)
+    newSandwich.averageRating = 0
     res.status(201).json({ newSandwich })
   } catch (error) {
     if (error instanceof ValidationError) {

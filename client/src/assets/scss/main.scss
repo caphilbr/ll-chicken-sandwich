@@ -65,6 +65,7 @@
   margin: 0.5rem;
   background-color: white;
   border-radius: .75rem;
+  padding-top: 1rem;
 }
 .review-tile p {
   margin: 0;
@@ -110,6 +111,7 @@
 
 .reviews-header {
   text-indent: 0.5rem;
+  font-weight: bold;
 }
 
 .select-file-box {
@@ -141,4 +143,50 @@
 
 .top-bar-background {
   background-color: var(--ll-lightest-color);
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  padding-bottom: 3px;
+}
+
+.dropdown-content-hidden {
+  @extend .dropdown-content;
+  display: none;
+}
+
+.drop-down-item {
+  color: black;
+  padding-top: 5px;
+  padding-left: 5px;
+  display: block;
+  cursor: pointer;
+  margin: 0;
+}
+
+.dropdown-content p:hover {
+  background-color: lightgray;
+}
+
+.sandwich-list-pic {
+  border-radius: 100%;
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+}
+
+.sandwich-show-pic {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+}
+
+.no-sandwich-photo {
+  font-size: smaller;
+  color: rgb(138, 138, 138)
 }

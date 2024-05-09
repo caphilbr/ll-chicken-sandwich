@@ -1,5 +1,3 @@
-import Review from "../models/Review.js"
-
 class ReviewSerializer {
   static summaryForShow = async (reviews, userId) => {
     const allowedReviewFields = [
