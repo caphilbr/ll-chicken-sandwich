@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import ReviewTile from "./ReviewTile";
 import NewReviewForm from "./NewReviewForm";
 import ShowStarAverage from "./ShowStarAverage";
+import roundHalf from "../services/roundToHalf";
 
 const SandwichShow = (props) => {
   const [sandwich, setSandwich] = useState({
@@ -99,13 +100,9 @@ const SandwichShow = (props) => {
     );
   });
 
-  const roundHalf = (num) => {
-    return Math.round(num*2)/2
-  }
-
-  let roundedAverage = roundHalf(sandwich.averageRating)
-  let average = parseFloat(sandwich.averageRating)
-  let fixedAverage = average.toFixed(2)
+  const roundedAverage = roundHalf(sandwich.averageRating)
+  const average = parseFloat(sandwich.averageRating)
+  const fixedAverage = average.toFixed(2)
 
   return (
     <div className="show-page">

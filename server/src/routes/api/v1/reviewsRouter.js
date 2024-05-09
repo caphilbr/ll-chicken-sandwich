@@ -31,6 +31,7 @@ reviewsRouter.patch("/:id", async (req, res) => {
       starRating: starRating
     }
     const persistedUpdate = await Review.query().updateAndFetchById(req.params.id, updatedReview)
+    persistedUpdate.username = req.user.username
     const sandwich = await Sandwich.query().findById(existingReview.sandwichId)
     const serializedSandwich = await SandwichSerializer.summaryForShow(sandwich, req.user.id)
     res.status(200).json({ review: persistedUpdate, sandwich: serializedSandwich })
