@@ -44,6 +44,8 @@ const SandwichList = (props) => {
         ...sandwiches,
         responseBody.newSandwich
       ])
+      setErrors({})
+      setShowForm(false)
     }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
@@ -65,7 +67,7 @@ const SandwichList = (props) => {
   const formQuestion = (
     <>
       <ErrorList errors={errors}/>
-      <SandwichForm addSandwich={addSandwich} setErrors={setErrors}/>
+      <SandwichForm addSandwich={addSandwich} errors={errors} setErrors={setErrors} />
     </>
   )
 

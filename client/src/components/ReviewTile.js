@@ -14,11 +14,12 @@ const ReviewTile = (props) => {
         { method: "DELETE" }
       )
       if (response.ok) {
+        const responseBody = await response.json()
         const remainingReviews = props.sandwich.reviews.filter((review) => {
           return review.id != props.review.id;
         });
         props.setSandwich({
-          ...props.sandwich,
+          ...responseBody.sandwich,
           reviews: remainingReviews,
         });
       }

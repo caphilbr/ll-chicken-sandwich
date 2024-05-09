@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReviewTile from "./ReviewTile";
 import NewReviewForm from "./NewReviewForm";
+import ShowStarAverage from "./ShowStarAverage";
+import ErrorList from "./ErrorList";
+import translateServerErrors from "../services/translateServerErrors";
 
 const SandwichShow = (props) => {
   const [sandwich, setSandwich] = useState({
@@ -15,6 +18,7 @@ const SandwichShow = (props) => {
   const { id } = useParams();
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [showLogInMessage, setShowLogInMessage] = useState(false);
+  const [errors, setErrors] = useState({})
 
   const getSandwich = async () => {
     try {
@@ -72,9 +76,11 @@ const SandwichShow = (props) => {
         const responseBody = await response.json();
         const newReview = responseBody.review;
         setSandwich({
-          ...sandwich,
+          ...responseBody.sandwich,
           reviews: [...sandwich.reviews, newReview],
-        });
+        })
+        setErrors({})
+        setShowReviewForm(false)
       }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
@@ -98,10 +104,17 @@ const SandwichShow = (props) => {
     );
   });
 
+  const roundHalf = (num) => {
+    return Math.round(num*2)/2
+  }
+
+  let roundedAverage = roundHalf(sandwich.averageRating)
+  
   return (
     <div className="show-page">
       <div className="grid-x grid-margin-x show-header">
-        <h2 className="cell small-12">{sandwich.name}</h2>
+        <h2 className="cell small-8">{sandwich.name}</h2>
+        <span className="avg-rating">Average Rating: <ShowStarAverage roundedAverage={roundedAverage}/></span>
         <h4 className="cell small-6 border-right">Restaurant: {sandwich.restaurant}</h4>
         {showDescription}
       </div>
@@ -109,9 +122,10 @@ const SandwichShow = (props) => {
         <p className="button" onClick={newReviewClick}>
           Add Review
         </p>
+      <ErrorList errors={errors} />
         {showLogInMessage ? <p>You need to be logged in to leave a review</p> : null}
         {showReviewForm ? (
-          <NewReviewForm setShowReviewForm={setShowReviewForm} addReview={addReview} />
+          <NewReviewForm setShowReviewForm={setShowReviewForm} addReview={addReview} setErrors={setErrors}/>
         ) : null}
       </div>
       <h4 className="reviews-header">Reviews</h4>
