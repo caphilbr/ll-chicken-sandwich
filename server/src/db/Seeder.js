@@ -8,25 +8,29 @@ class Seeder {
     await Sandwich.query().insert({
       name: "Chicken Slider", 
       restaurant: "Dave's Hot Chicken",
-      description: "It's hot."
+      description: "It's hot.",
+      imgUrl: "https://media.timeout.com/images/105465391/image.jpg"
     });
     
     await Sandwich.query().insert({
       name: "Wendy's Spicy Chicken Sandwich", 
       restaurant: "Wendy's",
-      description: "Very edible."
+      description: "Very edible.",
+      imgUrl: "https://media.cnn.com/api/v1/images/stellar/prod/201021184113-20201021-wendys-classic-chicken-sandwich.jpg?q=w_1110,c_fill"
     });
     
     await Sandwich.query().insert({
       name: "KFC Chicken Sandwich", 
       restaurant: "Kentucky Fried Chicken",
-      description: "Finger lickin' good"
+      description: "Finger lickin' good",
+      imgUrl: "https://media.cnn.com/api/v1/images/stellar/prod/210104061626-kfc-new-chicken-sandwich.jpg?q=x_3,y_0,h_1684,w_2993,c_crop/w_800"
     });
     
     await Sandwich.query().insert({
-      name: "Mochiko Chix Sandwich", 
+      name: "Chix Sandwich", 
       restaurant: "Mochiko Hawaiian",
-      description: "To die for."
+      description: "To die for.",
+      imgUrl: "https://images.squarespace-cdn.com/content/v1/601436f64ae00f5d5298aaea/1626966850645-I1VRO8EV1MPC1MWCCUBU/image-asset.jpeg"
     });
 
     await User.query().insert({

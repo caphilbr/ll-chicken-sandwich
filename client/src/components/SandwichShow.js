@@ -85,7 +85,7 @@ const SandwichShow = (props) => {
 
   let showDescription = null;
   if (sandwich.description) {
-    showDescription = <h4 className="cell small-6">Description: {sandwich.description}</h4>;
+    showDescription = <h4 className="cell small-6"><span className="bold">Description: </span>{sandwich.description}</h4>;
   }
 
   const reviewList = sandwich.reviews.map((review) => {
@@ -104,12 +104,22 @@ const SandwichShow = (props) => {
   const average = parseFloat(sandwich.averageRating)
   const fixedAverage = average.toFixed(2)
 
+  let sandwichPic = <span className="no-sandwich-photo">No sandwich picture uploaded yet...</span>
+  if (sandwich.imgUrl) {
+    sandwichPic = <img className="small-8 medium-9 large-11 sandwich-show-pic" src={sandwich.imgUrl}></img>
+  }
   return (
     <div className="show-page">
-      <div className="grid-x grid-margin-x show-header">
-        <h2 className="cell small-8">{sandwich.name}</h2>
-        <span className="avg-rating">Average Rating: <ShowStarAverage roundedAverage={roundedAverage}/> {fixedAverage}</span>
-        <h4 className="cell small-6 border-right">Restaurant: {sandwich.restaurant}</h4>
+      <div className="grid-x grid-margin-x show-header grid-margin-y">
+        <div className="cell small-2 grid-x">
+          {sandwichPic}
+        </div>
+        <h2 className="cell small-6 bold">{sandwich.name}</h2>
+        <div className="cell small-4 grid-x">
+          <span className="cell medium-12 large-6">Average Rating: </span>
+          <span className="cell medium-12 large-6"><ShowStarAverage roundedAverage={roundedAverage}/>{fixedAverage}</span>
+        </div>
+        <h4 className="cell small-6 border-right"><span className="bold">Restaurant: </span>{sandwich.restaurant}</h4>
         {showDescription}
       </div>
       <div className="form-container">
