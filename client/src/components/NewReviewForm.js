@@ -13,12 +13,6 @@ const NewReviewForm = (props) => {
   const submitForm = (event) => {
     event.preventDefault()
     props.addReview(reviewFormFields)
-    setReviewFormFields({
-      title: "",
-      body: "",
-      starRating: ""
-    })
-    props.setShowReviewForm(false)
   }
 
   const handleInputChange = (event) => {

@@ -45,6 +45,8 @@ const SandwichList = (props) => {
         ...sandwiches,
         responseBody.newSandwich
       ])
+      setErrors({})
+      setShowForm(false)
     }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
@@ -66,7 +68,7 @@ const SandwichList = (props) => {
   const formQuestion = (
     <>
       <ErrorList errors={errors}/>
-      <SandwichForm addSandwich={addSandwich} setErrors={setErrors}/>
+      <SandwichForm addSandwich={addSandwich} errors={errors} setErrors={setErrors} />
     </>
   )
 
@@ -102,18 +104,21 @@ const SandwichList = (props) => {
 
   return (
     <div className="grid-x grid-padding-y grid-margin-x background-color">
-      <div className="grid-x cell small-12 align-justify">
-          <p className="button cell small-3" onClick={toggleFormOnClick}>Add Sandwich</p>
-          <div className="cell small-3">
-            <p onClick={toggleDropDown} className="dropdown button">Sort by</p>
-            <div onMouseLeave={toggleDropDown} id="myDropdown" className={dropDownStyle}>
-              <p className="drop-down-item" onClick={sortBy} value="ratingHighest">Rating (High to Low)</p>
-              <p className="drop-down-item" onClick={sortBy} value="ratingLowest">Rating (Low to High)</p>
-              <p className="drop-down-item" onClick={sortBy} value="restaurant">Restaurant Name</p>
-              <p className="drop-down-item" onClick={sortBy} value="name">Sandwich Name</p>
-            </div>
-          </div>  
+      <div className="cell small-12">
         {showForm ? formQuestion : null}
+      </div>
+      <div className="cell small-12 grid-x">
+        <p className="button cell small-3" onClick={toggleFormOnClick}>Add Sandwich</p>
+        <div className="cell small-6"></div>
+        <div className="cell small-3">
+          <p onClick={toggleDropDown} className="dropdown button">Sort by</p>
+          <div onMouseLeave={toggleDropDown} id="myDropdown" className={dropDownStyle}>
+            <p className="drop-down-item" onClick={sortBy} value="ratingHighest">Rating (High to Low)</p>
+            <p className="drop-down-item" onClick={sortBy} value="ratingLowest">Rating (Low to High)</p>
+            <p className="drop-down-item" onClick={sortBy} value="restaurant">Restaurant Name</p>
+            <p className="drop-down-item" onClick={sortBy} value="name">Sandwich Name</p>
+          </div>
+        </div>  
       </div>
       <div className="cell small-12 grid-x grid-margin-x">
         {sandwichList}

@@ -3,6 +3,7 @@ import { Review } from "../../../models/index.js"
 import cleanUserInput from "../../../Services/cleanUserInput.js";
 import { Sandwich } from "../../../models/index.js";
 import SandwichSerializer from "../../../serializers/SandwichSerializer.js";
+import { ValidationError } from "objection";
 
 const sandwichReviewsRouter = new express.Router({ mergeParams: true })
 
@@ -23,8 +24,11 @@ sandwichReviewsRouter.post("/", async (req, res) => {
     const serializedSandwich = await SandwichSerializer.summaryForShow(sandwich, req.user.id)
     return res.status(201).json({ review: newReview, sandwich: serializedSandwich })
   } catch(error) {
-    console.log(error)
-    res.status(500).json({ error:error })
+    if (error instanceof ValidationError) {
+      res.status(422).json( {errors: error.data })
+    } else {  
+      res.status(500).json({ error:error })
+    }
   }
 })
 
