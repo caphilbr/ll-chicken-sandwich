@@ -11,6 +11,20 @@
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
+  --ll-lightest-color: #FCECDD;
+  --ll-light-color: #FFC288;
+  --ll-medium-color: #FEA82F;
+  --ll-dark-color: #FF6701;
+}
+
+.list-background-color {
+  background-color: var(--ll-lightest-color)
+}
+
+.error-box {
+  background-color: var(--ll-light-color);
+  border: 1px black solid;
+  padding: 0.5rem;
 }
 
 .bold {
@@ -19,7 +33,7 @@
 
 .review-body {
   font-size: smaller;
-  background-color: rgb(234, 250, 255);
+  margin-top: 0.25rem;
 }
 
 .review-tile {
@@ -41,7 +55,7 @@
 }
 
 .show-page {
-  background-color: rgb(224, 247, 255);
+  background-color: var(--ll-lightest-color);
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
@@ -107,7 +121,7 @@
   margin-top: 0.25rem;
   cursor: pointer;
   padding: 0.15rem;
-  background-color: rgb(23, 121, 186);
+  background-color: var(--ll-dark-color);
   color: white;
   font-weight: bold;
 }
@@ -125,6 +139,10 @@
 
 .fa-thumbs-up, .fa-thumbs-down {
   cursor: pointer;
+}
+
+.top-bar-background {
+  background-color: var(--ll-lightest-color);
 }
 
 .dropdown-content {

@@ -28,7 +28,7 @@ const App = (props) => {
 
   return (
     <Router>
-      <TopBar user={currentUser} />
+      <TopBar user={currentUser} className="top-bar-background"/>
       <Switch>
         <Route exact path="/sandwiches/:id">
           <SandwichShow user={currentUser} />

@@ -103,7 +103,7 @@ const SandwichList = (props) => {
   })
 
   return (
-    <div className="grid-x grid-padding-y grid-margin-x background-color">
+    <div className="grid-x grid-padding-x grid-padding-y grid-margin-x list-background-color">
       <div className="cell small-12">
         {showForm ? formQuestion : null}
       </div>
