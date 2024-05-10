@@ -37,7 +37,7 @@ const ReviewTile = (props) => {
   };
 
   let deleteButton = (
-    <p className="cell alert button small" onClick={deleteClick}>
+    <p className="cell delete-color button small" onClick={deleteClick}>
       Delete Review
     </p>
   );
@@ -89,11 +89,13 @@ const ReviewTile = (props) => {
         ) : (
           reviewContent
         )}
-        <ReviewVotes
-          review={props.review}
-          sandwich={props.sandwich}
-          setSandwich={props.setSandwich}
-        />
+        {showEdit ? null : 
+          <ReviewVotes
+            review={props.review}
+            sandwich={props.sandwich}
+            setSandwich={props.setSandwich}
+          />
+        }
       </div>
       <div className="grid-margin-x review-bottom-bar">{deleteEditButtons}</div>
     </div>

@@ -103,27 +103,30 @@ const SandwichList = (props) => {
   })
 
   return (
-    <div className="grid-x grid-padding-x grid-padding-y grid-margin-x list-background-color">
-      <div className="cell small-12">
-        {showForm ? formQuestion : null}
-      </div>
-      <div className="cell small-12 grid-x">
-        <p className="button cell small-3" onClick={toggleFormOnClick}>Add Sandwich</p>
-        <div className="cell small-6"></div>
-        <div className="cell small-3">
-          <p onClick={toggleDropDown} className="dropdown button">Sort by</p>
-          <div onMouseLeave={toggleDropDown} id="myDropdown" className={dropDownStyle}>
-            <p className="drop-down-item" onClick={sortBy} value="ratingHighest">Rating (High to Low)</p>
-            <p className="drop-down-item" onClick={sortBy} value="ratingLowest">Rating (Low to High)</p>
-            <p className="drop-down-item" onClick={sortBy} value="restaurant">Restaurant Name</p>
-            <p className="drop-down-item" onClick={sortBy} value="name">Sandwich Name</p>
+    <>
+      <div className="title-container"><img className="cell small-6 title" src="https://fontmeme.com/permalink/240510/ca112d72921709a3c81ad78f4af00ca2.png" alt="fancy-fonts" border="0"/></div>
+      <div className="grid-x list-page grid-padding-y">
+        <div className="cell grid-x align-center grid-margin-x">
+          <p className="button cell small-3 medium-3 large-2" onClick={toggleFormOnClick}>Add Sandwich</p>
+          <div className="cell small-3 medium-3 large-2">
+            <p onClick={toggleDropDown} className="sort button dropdown">Sort by</p>
+            <div onMouseLeave={toggleDropDown} id="myDropdown" className={dropDownStyle}>
+              <p className="drop-down-item" onClick={sortBy} value="ratingHighest">Rating (High to Low)</p>
+              <p className="drop-down-item" onClick={sortBy} value="ratingLowest">Rating (Low to High)</p>
+              <p className="drop-down-item" onClick={sortBy} value="restaurant">Restaurant Name</p>
+              <p className="drop-down-item" onClick={sortBy} value="name">Sandwich Name</p>
+  
+            </div>  
           </div>
-        </div>  
+        </div>
+        <div className="cell small-12 medium-8 medium-offset-2 large-6 large-offset-3">
+          {showForm ? formQuestion : null}
+        </div>
+        <div className="cell small-12 grid-x grid-margin-x">
+          {sandwichList}
+        </div>
       </div>
-      <div className="cell small-12 grid-x grid-margin-x">
-        {sandwichList}
-      </div>
-    </div>
+    </>
   )
 }
 

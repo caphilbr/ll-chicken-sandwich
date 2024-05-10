@@ -15,10 +15,12 @@
   --ll-light-color: #FFC288;
   --ll-medium-color: #FEA82F;
   --ll-dark-color: #FF6701;
+  --ll-darkest-color: #a94400;
 }
 
-.list-background-color {
-  background-color: var(--ll-lightest-color)
+.list-page {
+  background-color: var(--ll-lightest-color);
+  padding-left: 1rem;
 }
 
 .error-box {
@@ -71,10 +73,6 @@
   margin: 0;
 }
 
-.form-container {
-  margin: 0.5rem;
-}
-
 .sandwich-tile {
   border-radius: 1.5rem;
   height: max(8rem, auto);
@@ -104,8 +102,8 @@
   height: 15rem;
   padding: 1rem;
   background-color: lightgrey;
-  display: inline-block;
-  line-height: 15rem;
+  display: block;
+  // line-height: 15rem;
   color: rgb(138, 138, 138)
 }
 
@@ -115,7 +113,7 @@
 }
 
 .select-file-box {
-  width: 15rem;
+  // width: 15rem;
   border-radius: 0.25rem;
   margin-bottom: 1rem;
   margin-top: 0.25rem;
@@ -127,7 +125,7 @@
 }
 
 .show-file-box {
-  width: 15rem;
+  // width: 15rem;
   border-radius: 0.25rem;
   margin-bottom: 1rem;
   margin-top: 0.25rem;
@@ -189,4 +187,49 @@
 .no-sandwich-photo {
   font-size: smaller;
   color: rgb(138, 138, 138)
+}
+
+.profile-page {
+  background-color: var(--ll-lightest-color);
+  padding-top: 1rem;
+}
+
+.delete-color {
+  background-color: #7a0000;
+}
+
+.form {
+  border: 2px var(--ll-darkest-color) solid;
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+  background-color: var(--ll-light-color);
+  max-width: 60rem;
+}
+
+.form label {
+  font-weight: bold;
+}
+
+.title {
+  padding: 1rem;
+  max-width: 500px;
+}
+
+.title-container {
+  background-color: var(--ll-lightest-color);
+  text-align: center;
+}
+
+.sort {
+  display: block;
+}
+
+.right-align {
+  text-align: right;
+  padding-right: 0.5rem;
+}
+
+.add-review-section {
+  margin-left: 0.5rem;
+  margin-bottom: 1rem;
 }
