@@ -106,7 +106,7 @@ const SandwichList = (props) => {
     <>
       <div className="title-container"><img className="cell small-6 title" src="https://fontmeme.com/permalink/240510/ca112d72921709a3c81ad78f4af00ca2.png" alt="fancy-fonts" border="0"/></div>
       <div className="grid-x list-page grid-padding-y">
-        <div className="cell grid-x align-right grid-margin-x">
+        <div className="cell grid-x align-center grid-margin-x">
           <p className="button cell small-3 medium-3 large-2" onClick={toggleFormOnClick}>Add Sandwich</p>
           <div className="cell small-3 medium-3 large-2">
             <p onClick={toggleDropDown} className="sort button dropdown">Sort by</p>
@@ -119,7 +119,7 @@ const SandwichList = (props) => {
             </div>  
           </div>
         </div>
-        <div className="cell small-12 medium-8 large-6">
+        <div className="cell small-12 medium-8 medium-offset-2 large-6 large-offset-3">
           {showForm ? formQuestion : null}
         </div>
         <div className="cell small-12 grid-x grid-margin-x">
