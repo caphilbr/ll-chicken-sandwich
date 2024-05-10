@@ -15,6 +15,7 @@
   --ll-light-color: #FFC288;
   --ll-medium-color: #FEA82F;
   --ll-dark-color: #FF6701;
+  --ll-darkest-color: #a94400;
 }
 
 .list-background-color {
@@ -189,4 +190,8 @@
 .no-sandwich-photo {
   font-size: smaller;
   color: rgb(138, 138, 138)
+}
+
+.button {
+  display: block;
 }

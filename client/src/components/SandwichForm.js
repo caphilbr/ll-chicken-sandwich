@@ -67,9 +67,9 @@ const SandwichForm = (props) => {
           value={sandwich.imageURL}
         />
       </label>
-      <div>
-        <input className="button" type="submit" value="Create Sandwich"/>
-        <p className="button clear-button" onClick={clearForm}>
+      <div className="grid-x grid-padding-x">
+        <input className="cell small-2 button" type="submit" value="Create Sandwich"/>
+        <p className="cell small-2 button clear-button" onClick={clearForm}>
           Clear
         </p>
       </div>
