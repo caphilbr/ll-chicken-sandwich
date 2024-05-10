@@ -1,7 +1,7 @@
 import express from "express"
 import { Review } from "../../../models/index.js"
 import { ValidationError } from "objection"
-import { Sandwich } from "../../../models/index.js"
+import { Sandwich, Vote } from "../../../models/index.js"
 import SandwichSerializer from "../../../serializers/SandwichSerializer.js"
 
 const reviewsRouter = new express.Router()
@@ -32,6 +32,9 @@ reviewsRouter.patch("/:id", async (req, res) => {
     }
     const persistedUpdate = await Review.query().updateAndFetchById(req.params.id, updatedReview)
     persistedUpdate.username = req.user.username
+    persistedUpdate.votes = await persistedUpdate.voteCount()
+    const vote = await Vote.query().where('userId', req.user.id).andWhere('reviewId', persistedUpdate.id)
+    persistedUpdate.voteStatus = vote[0].voteStatus
     const sandwich = await Sandwich.query().findById(existingReview.sandwichId)
     const serializedSandwich = await SandwichSerializer.summaryForShow(sandwich, req.user.id)
     res.status(200).json({ review: persistedUpdate, sandwich: serializedSandwich })

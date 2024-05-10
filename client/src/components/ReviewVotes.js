@@ -73,7 +73,7 @@ const ReviewVotes = props => {
   if (showSignInMessage) {
     signinMessage = <p>You must be signed in to vote</p>
   }
-  
+
   return (
     <div className="like-statuses">
       {signinMessage}
