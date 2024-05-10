@@ -24,7 +24,7 @@ const NewReviewForm = (props) => {
   
   return(
     <>
-      <form onSubmit={submitForm}>
+      <form className="form" onSubmit={submitForm}>
         <label> Star Rating:</label>
         <SelectStarRating reviewFormFields={reviewFormFields} setReviewFormFields={setReviewFormFields} />
         <label> Title:

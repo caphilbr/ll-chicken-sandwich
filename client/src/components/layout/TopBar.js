@@ -7,10 +7,10 @@ const TopBar = ({ user }) => {
   const { id } = useParams()
   const unauthenticatedListItems = [
     <li key="sign-in">
-      <Link to="/user-sessions/new">Sign In</Link>
+      <Link className="bold" to="/user-sessions/new">Sign In</Link>
     </li>,
     <li key="sign-up">
-      <Link to="/users/new" className="button">
+      <Link to="/users/new" className="button bold">
         Sign Up
       </Link>
     </li>,
@@ -18,7 +18,7 @@ const TopBar = ({ user }) => {
 
   const authenticatedListItems = [
     <li key="profile-page">
-        <Link to={`/user-profile`}>Profile page</Link>
+        <Link className="bold" to={`/user-profile`}>Profile page</Link>
     </li>,
     <li key="sign-out">
       <SignOutButton />
@@ -30,7 +30,7 @@ const TopBar = ({ user }) => {
       <div className="top-bar-left">
         <ul className="menu">
           <li>
-            <Link to="/">Home</Link>
+            <Link className="bold" to="/">Home</Link>
           </li>
         </ul>
       </div>

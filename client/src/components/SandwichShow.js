@@ -116,26 +116,26 @@ const SandwichShow = (props) => {
   return (
     <div className="show-page">
       <div className="grid-x grid-margin-x show-header grid-margin-y">
-        <div className="cell small-2 grid-x">
+        <div className="cell small-4 medium-3 large-2 grid-x">
           {sandwichPic}
         </div>
-        <h2 className="cell small-6 bold">{sandwich.name}</h2>
-        <div className="cell small-4 grid-x">
-          <span className="cell medium-12 large-6">Average Rating: </span>
-          <span className="cell medium-12 large-6"><ShowStarAverage roundedAverage={roundedAverage}/>{fixedAverage}</span>
+        <h2 className="cell large-8 medium-6 small-4 bold">{sandwich.name}</h2>
+        <div className="cell large-2 medium-3 small-4 grid-x align-right">
+          <span className="cell ">Average Rating: </span>
+          <span className="cell "><ShowStarAverage roundedAverage={roundedAverage}/>{fixedAverage}</span>
         </div>
         <h4 className="cell small-6 border-right"><span className="bold">Restaurant: </span>{sandwich.restaurant}</h4>
         {showDescription}
       </div>
-      <div className="form-container">
+      <div className="add-review-section">
         <p className="button" onClick={newReviewClick}>
           Add Review
         </p>
-      <ErrorList errors={errors} />
-        {showLogInMessage ? <p>You need to be logged in to leave a review</p> : null}
-        {showReviewForm ? (
-          <NewReviewForm setShowReviewForm={setShowReviewForm} addReview={addReview} setErrors={setErrors}/>
-        ) : null}
+        <ErrorList errors={errors} />
+          {showLogInMessage ? <p>You need to be logged in to leave a review</p> : null}
+          {showReviewForm ? (
+            <NewReviewForm setShowReviewForm={setShowReviewForm} addReview={addReview} setErrors={setErrors}/>
+          ) : null}
       </div>
       <h4 className="reviews-header">Reviews</h4>
       {reviewList}

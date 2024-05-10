@@ -73,29 +73,33 @@ const UserProfile = ({ user }) => {
   return (
     <>
       {user ? 
-      <>
-        {profilePic}
-        <form onSubmit={addUserPhoto}>
-          <div className={fileStyle} >
-            <Dropzone onDrop={handleUserPhotoUpload}>
-              {({getRootProps, getInputProps}) => (
-                <section>
-                  <div {...getRootProps()}>
-                    <input {...getInputProps()} />
-                    <p>{uploadMessage}</p>
-                  </div>
-                </section>
-              )}
-            </Dropzone>
-          </div>
-          {uploadButton}
-        </form>
-        <h1>{user.username}'s Homepage</h1>
-        <h4>Username:</h4>
-        <p>{user.username}</p>
-        <h4>Email:</h4>
-        <p>{user.email}</p>
-      </> : <h1>You need to be logged in to see this page.</h1>}
+      <div className="grid-x grid-padding-x profile-page">
+        <div className="cell small-3 align-center">
+          {profilePic}
+          <form onSubmit={addUserPhoto}>
+            <div className={fileStyle} >
+              <Dropzone onDrop={handleUserPhotoUpload}>
+                {({getRootProps, getInputProps}) => (
+                  <section>
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <p>{uploadMessage}</p>
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+            </div>
+            {uploadButton}
+          </form>
+        </div>
+        <div className="cell small-9">
+          <h1>{user.username}'s Homepage</h1>
+          <h4>Username:</h4>
+          <p>{user.username}</p>
+          <h4>Email:</h4>
+          <p>{user.email}</p>
+        </div>
+      </div> : <h1>You need to be logged in to see this page.</h1>}
     </>
   )
 }

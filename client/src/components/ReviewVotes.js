@@ -55,14 +55,18 @@ const ReviewVotes = props => {
   }
 
   let thumbsUpClass = "fa-regular fa-thumbs-up"
+  let upColor = "grey"
   let thumbsDownClass = "fa-regular fa-thumbs-down"
+  let downColor = "grey"
 
   if (currentVoteStatus === 1) {
     thumbsUpClass = "fa-solid fa-thumbs-up"
+    upColor = "green"
   }
 
   if (currentVoteStatus === -1) {
     thumbsDownClass = "fa-solid fa-thumbs-down"
+    downColor = "red"
   }
 
   let signinMessage
@@ -74,9 +78,9 @@ const ReviewVotes = props => {
     <div className="like-statuses">
       {signinMessage}
       <p>
-        <FontAwesomeIcon icon={thumbsUpClass} onClick={onUpVote}/>
+        <FontAwesomeIcon icon={thumbsUpClass} onClick={onUpVote} color={upColor} />
         <span > {voteCount.upVotes} | {voteCount.downVotes} </span>
-        <FontAwesomeIcon icon={thumbsDownClass} onClick={onDownVote}/>
+        <FontAwesomeIcon icon={thumbsDownClass} onClick={onDownVote} color={downColor}/>
       </p>
     </div>
   )
