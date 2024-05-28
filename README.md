@@ -2,7 +2,7 @@
 This webpage is designed to allow users to review different chicken sandwiches. Anyone can add a sandwich, but only logged in users can review them and vote on reviews.
 
 ## Authors:
- Charlie, Chris, Alex, Sean
+ Group Project: Charlie, Chris, Alex, Sean
 
 ## Steps to get working
 1. Install necessary dependencies with 'yarn'
